@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Lowongan;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,10 @@ class LowonganController extends Controller
      */
     public function index()
     {
+        $title_alert = 'Hapus Data Lowongan';
+        $text_alert = "Apakah anda yakin menghapus data ini?";
+        confirmDelete($title_alert, $text_alert);
+
         return view(
             'lowongan.index',
             [
@@ -54,7 +59,7 @@ class LowonganController extends Controller
 
         Lowongan::create($request->all());
 
-        // Alert::success('Data Prestasi', 'Berhasil Ditambahkan!');
+        Alert::success('Data Lowongan', 'Berhasil Ditambahkan!');
         return redirect('/lowongan');
     }
 
@@ -100,7 +105,7 @@ class LowonganController extends Controller
 
         $lowongan->update($request->all());
 
-        // Alert::success('Data Prestasi', 'Berhasil Ditambahkan!');
+        Alert::success('Data Lowongan', 'Berhasil Diubah!');
         return redirect('/lowongan');
     }
 
@@ -109,6 +114,8 @@ class LowonganController extends Controller
      */
     public function destroy(Lowongan $lowongan)
     {
-        //
+        $lowongan->delete();
+        Alert::success('Data Lowongan', 'Berhasil Dihapus!');
+        return redirect('/lowongan');
     }
 }

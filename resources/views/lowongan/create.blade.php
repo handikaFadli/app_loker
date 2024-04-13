@@ -68,8 +68,12 @@
 											</div>
 									</div>
 									<div class="row mt-3 mx-1 justify-content-between">
-										<a href="/lowongan" class="btn btn-rounded btn-light">Back</a>
-										<button type="submit" class="btn btn-rounded btn-primary">Save</button>
+										<a href="/lowongan" class="btn btn-rounded btn-dark">
+											Back
+										</a>
+										<button type="submit" class="btn btn-rounded btn-primary">
+											Save
+										</button>
 									</div>
 								</form>
 							</div>

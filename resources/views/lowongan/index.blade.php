@@ -59,11 +59,11 @@
 																		<a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="Detail">
 																			<i class="fa fa-eye color-muted"></i>
 																		</a>
-																		<a href="{{ route("lowongan.edit",$dt->id) }}" class="mr-4" data-toggle="tooltip" data-placement="top" title="Edit">
+																		<a href="{{ route("lowongan.edit", $dt->id) }}" class="mr-4" data-toggle="tooltip" data-placement="top" title="Edit">
 																			<i class="fa fa-pencil color-muted"></i>
 																		</a>
-																		<a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="Delete">
-																			<i class="fa fa-close color-danger"></i>
+																		<a href="{{ route("lowongan.destroy", $dt->id) }}" data-toggle="tooltip" data-placement="top" title="Hapus" data-confirm-delete="true">
+																			X
 																		</a>
 																	</span>
 																</td>

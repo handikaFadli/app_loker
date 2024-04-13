@@ -103,6 +103,9 @@
     <!--**********************************
         Scripts
     ***********************************-->
+
+    @include('sweetalert::alert')
+    
     <!-- Required vendors -->
     <script src="{{ asset('assets/vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('assets/js/quixnav-init.js') }}"></script>
