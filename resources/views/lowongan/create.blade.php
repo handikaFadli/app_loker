@@ -55,6 +55,38 @@
 											</div>
 									</div>
 									<div class="form-row">
+										<div class="form-group col-md-6">
+												<label for="lokasi">Lokasi Perusahaan</label>
+												<span class="text-danger">*</span>
+												<input type="text" class="form-control" id="lokasi" name="lokasi" value="{{ old('lokasi') }}">
+												@error('lokasi')
+													<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+														*{{ $message }}
+													</div>
+												@enderror
+										</div>
+										<div class="form-group col-md-6">
+											<label for="tipe">Tipe Pekerjaan</label>
+											<span class="text-danger">*</span>
+											<select id="tipe" name="tipe" class="form-control">
+												<option value="0" hidden disabled selected></option>
+												@if (old('tipe') == "full time")
+												<option value="full time" selected>full time</option>
+												@elseif (old('tipe') == "part time")
+												<option value="part time" selected>part time</option>
+												@else
+												<option value="full time">full time</option>
+												<option value="part time">part time</option>
+												@endif
+											</select>
+											@error('tipe')
+												<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+													*{{ $message }}
+												</div>
+											@enderror
+										</div>
+									</div>
+									{{-- <div class="form-row">
 											<div class="form-group col-md-12">
 												<label for="persyaratan">Persyaratan</label>
 												<span class="text-danger">*</span>
@@ -66,12 +98,12 @@
 													</div>
 												@enderror
 											</div>
-									</div>
-									<div class="row mt-3 mx-1 justify-content-between">
-										<a href="/lowongan" class="btn btn-rounded btn-dark">
+									</div> --}}
+									<div class="row mt-4 mx-1">
+										<a href="/lowongan" class="btn btn-rounded btn-light">
 											Back
 										</a>
-										<button type="submit" class="btn btn-rounded btn-primary">
+										<button type="submit" class="btn btn-rounded btn-primary ml-2">
 											Save
 										</button>
 									</div>

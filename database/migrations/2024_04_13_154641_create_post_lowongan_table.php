@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lowongan', function (Blueprint $table) {
+        Schema::create('post_lowongan', function (Blueprint $table) {
             $table->id();
-            $table->string('perusahaan', 255);
-            $table->string('posisi', 255);
-            $table->string('lokasi', 255);
-            $table->enum('tipe', ['full time', 'part time'])->default('full time');
+            $table->foreignId('lowongan_id');
+            $table->string('judul', 255);
+            $table->date('batas_waktu');
+            $table->text('deskripsi');
+            $table->text('gambar');
+            $table->enum('status', ['closed', 'open'])->default('closed');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lowongan');
+        Schema::dropIfExists('post_lowongan');
     }
 };

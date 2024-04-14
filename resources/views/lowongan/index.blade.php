@@ -42,8 +42,9 @@
 																<tr>
 																		<th>No</th>
 																		<th>Perusahaan</th>
+																		<th width="30%">Lokasi</th>
 																		<th>Posisi</th>
-																		<th>Persyaratan</th>
+																		<th>Tipe Pekerjaan</th>
 																		<th>Action</th>
 																</tr>
 														</thead>
@@ -52,10 +53,11 @@
 															<tr>
 																<td>{{ $loop->iteration }}</td>
 																<td>{{ $dt->perusahaan }}</td>
+																<td width="30%">{{ $dt->lokasi }}</td>
 																<td>{{ $dt->posisi }}</td>
-																<td>{!! $dt->persyaratan !!}</td>
+																<td>{{ $dt->tipe }}</td>
 																<td>
-																	<span>
+																	<span class="justify-content-center">
 																		<a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="Detail">
 																			<i class="fa fa-eye color-muted"></i>
 																		</a>
@@ -74,8 +76,9 @@
 																<tr>
 																	<th>No</th>
 																	<th>Perusahaan</th>
+																	<th width="30%">Lokasi</th>
 																	<th>Posisi</th>
-																	<th>Persyaratan</th>
+																	<th>Tipe Pekerjaan</th>
 																	<th>Action</th>
 																</tr>
 														</tfoot>

@@ -48,12 +48,14 @@ class LowonganController extends Controller
             [
                 'perusahaan' => 'required',
                 'posisi' => 'required',
-                'persyaratan' => 'required',
+                'lokasi' => 'required',
+                'tipe' => 'required',
             ],
             [
                 'perusahaan.required' => 'Inputan perusahaan harus diisi',
                 'posisi.required' => 'Inputan posisi harus diisi',
-                'persyaratan.required' => 'Inputan persyaratan harus diisi',
+                'lokasi.required' => 'Inputan lokasi harus diisi',
+                'tipe.required' => 'Inputan tipe harus diisi',
             ]
         );
 
@@ -94,12 +96,14 @@ class LowonganController extends Controller
             [
                 'perusahaan' => 'required',
                 'posisi' => 'required',
-                'persyaratan' => 'required',
+                'lokasi' => 'required',
+                'tipe' => 'required',
             ],
             [
                 'perusahaan.required' => 'Inputan perusahaan harus diisi',
                 'posisi.required' => 'Inputan posisi harus diisi',
-                'persyaratan.required' => 'Inputan persyaratan harus diisi',
+                'lokasi.required' => 'Inputan lokasi harus diisi',
+                'tipe.required' => 'Inputan tipe harus diisi',
             ]
         );
 
