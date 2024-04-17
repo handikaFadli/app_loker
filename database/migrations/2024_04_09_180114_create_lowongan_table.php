@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('posisi', 255);
             $table->string('lokasi', 255);
             $table->enum('tipe', ['full time', 'part time'])->default('full time');
+            $table->enum('status', ['1', '2'])->default('1');
             $table->timestamps();
         });
     }

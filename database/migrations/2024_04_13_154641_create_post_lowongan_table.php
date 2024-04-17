@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('post_lowongan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('lowongan_id');
-            $table->string('judul', 255);
+            $table->string('judul', 255)->unique();
+            $table->string('post_slug', 255)->unique();
             $table->date('batas_waktu');
             $table->text('deskripsi');
             $table->text('gambar');
-            $table->enum('status', ['closed', 'open'])->default('closed');
+            $table->enum('status', ['close', 'open'])->default('close');
             $table->timestamps();
         });
     }

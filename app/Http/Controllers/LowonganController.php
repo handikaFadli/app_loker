@@ -18,7 +18,7 @@ class LowonganController extends Controller
         confirmDelete($title_alert, $text_alert);
 
         return view(
-            'lowongan.index',
+            'admin.lowongan.index',
             [
                 'title' => 'Lowongan Pekerjaan',
                 'data' => Lowongan::all(),
@@ -32,7 +32,7 @@ class LowonganController extends Controller
     public function create()
     {
         return view(
-            'lowongan.create',
+            'admin.lowongan.create',
             [
                 'title' => 'Lowongan Pekerjaan',
             ]
@@ -62,7 +62,7 @@ class LowonganController extends Controller
         Lowongan::create($request->all());
 
         Alert::success('Data Lowongan', 'Berhasil Ditambahkan!');
-        return redirect('/lowongan');
+        return redirect('/admin/lowongan');
     }
 
     /**
@@ -79,7 +79,7 @@ class LowonganController extends Controller
     public function edit(Lowongan $lowongan)
     {
         return view(
-            'lowongan.edit',
+            'admin.lowongan.edit',
             [
                 'title' => 'Lowongan Pekerjaan',
                 'lowongan' => $lowongan
@@ -110,7 +110,7 @@ class LowonganController extends Controller
         $lowongan->update($request->all());
 
         Alert::success('Data Lowongan', 'Berhasil Diubah!');
-        return redirect('/lowongan');
+        return redirect('/admin/lowongan');
     }
 
     /**
@@ -120,6 +120,6 @@ class LowonganController extends Controller
     {
         $lowongan->delete();
         Alert::success('Data Lowongan', 'Berhasil Dihapus!');
-        return redirect('/lowongan');
+        return redirect('/admin/lowongan');
     }
 }
