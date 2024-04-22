@@ -1,22 +1,11 @@
 @extends('admin.layouts.main')
 
 @section('title')
-	Admin App Loker - {{ $title }}
+		Admin App Loker - {{ $title }}
 @endsection
 
 @section('content-admin')
 	<div class="container-fluid">
-
-		@if ($lowongan)
-			<div class="alert alert-warning solid alert-right-icon alert-dismissible fade show">
-				<span><i class="mdi mdi-alert"></i></span>
-				<button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
-				</button>
-				<strong>Warning!</strong> Terdapat {{ $lowongan }} data lowongan yang belum diposting!.
-			</div>
-		@endif
-		
-
 		<div class="row page-titles mx-0">
 				<div class="col-sm-6 p-md-0">
 						<div class="welcome-text">
@@ -27,7 +16,7 @@
 				<div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
 						<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-								<li class="breadcrumb-item active"><a href="javascript:void(0)">Lowongan</a></li>
+								<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ $title }}</a></li>
 						</ol>
 				</div>
 		</div>
@@ -37,7 +26,7 @@
 						<div class="card">
 								<div class="card-header justify-content-between">
 										<h4 class="card-title">Daftar</h4>
-										<a href="{{ route('post-lowongan.create') }}" class="btn btn-sm btn-rounded btn-primary">
+										<a href="{{ route('perusahaan.create') }}" class="btn btn-sm btn-rounded btn-primary">
 											<span class="btn-icon-left text-primary">
 												<i class="fa fa-plus"></i>
 											</span>
@@ -50,39 +39,28 @@
 														<thead>
 																<tr>
 																		<th>No</th>
-																		<th>Judul</th>
-																		<th>Posisi</th>
-																		<th>Batas Waktu</th>
-																		<th>Status</th>
+																		<th width="25%">Perusahaan</th>
+																		<th>Lokasi</th>
+																		<th width="35%">Deskripsi</th>
 																		<th>Action</th>
 																</tr>
 														</thead>
 														<tbody>
 															@foreach ($data as $dt)
-															@php
-																	\Carbon\Carbon::setLocale('id');
-															@endphp
 															<tr>
 																<td>{{ $loop->iteration }}</td>
-																<td>{{ $dt->judul }}</td>
-																<td>{{ $dt->posisi }}</td>
-																<td>{{ \Carbon\Carbon::parse($dt->batas_waktu)->translatedFormat('d F Y') }}</td>
-																<td>
-																	@if ($dt->status == "closed")
-																		<span class="badge badge-rounded badge-outline-warning">Closed</span>
-																	@else
-																		<span class="badge badge-rounded badge-outline-success">Open</span>
-																	@endif
-																</td>
+																<td width="25%">{{ $dt->nama }}</td>
+																<td>{{ $dt->lokasi }}</td>
+																<td width="35%">{{ $dt->deskripsi }}</td>
 																<td>
 																	<span class="justify-content-center">
 																		<a href="javascript:void()" class="mr-2" data-toggle="tooltip" data-placement="top" title="Detail">
 																			<i class="fa fa-eye color-muted"></i>
 																		</a>
-																		<a href="{{ route("post-lowongan.edit", $dt->id) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Edit">
+																		<a href="{{ route("perusahaan.edit", $dt->id) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Edit">
 																			<i class="fa fa-pencil color-muted"></i>
 																		</a>
-																		<a href="{{ route("post-lowongan.destroy", $dt->id) }}" data-toggle="tooltip" data-placement="top" title="Hapus" data-confirm-delete="true">
+																		<a href="{{ route("perusahaan.destroy", $dt->id) }}" data-toggle="tooltip" data-placement="top" title="Hapus" data-confirm-delete="true">
 																			X
 																		</a>
 																	</span>
@@ -93,10 +71,9 @@
 														<tfoot>
 																<tr>
 																	<th>No</th>
-																	<th>Judul</th>
-																	<th>Posisi</th>
-																	<th>Batas Waktu</th>
-																	<th>Status</th>
+																	<th width="25%">Perusahaan</th>
+																	<th>Lokasi</th>
+																	<th width="35%">Deskripsi</th>
 																	<th>Action</th>
 																</tr>
 														</tfoot>

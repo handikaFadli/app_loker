@@ -323,27 +323,6 @@
         <div class="single-head">
           <div class="row">
             <div class="col-lg-6 col-12">
-              <!-- Single Job -->
-              <div class="single-job wow fadeInUp" data-wow-delay=".3s">
-                <div class="job-image">
-                  <img src="{{ asset('assets_landing/images/jobs/img1.png') }}" alt="#" />
-                </div>
-                <div class="job-content">
-                  <h4><a href="job-details.html">Software Engineer</a></h4>
-                  <p>We are looking for Enrollment Advisors who are looking to take 30-35 appointments per week. All leads are pre-scheduled.</p>
-                  <ul>
-                    <li><i class="lni lni-website"></i><a href="#"> winbrans.com</a></li>
-                    <li><i class="lni lni-dollar"></i> $20k - $25k</li>
-                    <li><i class="lni lni-map-marker"></i> New York</li>
-                  </ul>
-                </div>
-                <div class="job-button">
-                  <ul>
-                    <li><a href="job-details.html">Apply</a></li>
-                    <li><span>full time</span></li>
-                  </ul>
-                </div>
-              </div>
               <!-- End Single Job -->
               <!-- Single Job -->
               <div class="single-job wow fadeInUp" data-wow-delay=".3s">

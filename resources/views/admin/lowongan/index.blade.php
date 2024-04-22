@@ -1,15 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('title')
-		Admin App Loker - {{ $title }}
-@endsection
-
-@section('style')
-		<style>
-			a.badge-outline-warning:hover {
-					color: #ffaa16;
-			}
-		</style>
+	Admin App Loker - {{ $title }}
 @endsection
 
 @section('content-admin')
@@ -47,27 +39,32 @@
 														<thead>
 																<tr>
 																		<th>No</th>
-																		<th width="20%">Perusahaan</th>
-																		<th width="25%">Lokasi</th>
-																		<th>Posisi</th>
-																		<th>Tipe Pekerjaan</th>
+																		{{-- <th>Perusahaan</th> --}}
+																		<th>Judul</th>
+																		<th>Kategori</th>
+																		<th>Tipe</th>
+																		<th>Batas Waktu</th>
 																		<th>Status</th>
 																		<th>Action</th>
 																</tr>
 														</thead>
 														<tbody>
 															@foreach ($data as $dt)
+															@php
+																	\Carbon\Carbon::setLocale('id');
+															@endphp
 															<tr>
 																<td>{{ $loop->iteration }}</td>
-																<td width="20%">{{ $dt->perusahaan }}</td>
-																<td width="25%">{{ $dt->lokasi }}</td>
-																<td>{{ $dt->posisi }}</td>
+																{{-- <td>{{ $dt->nama }}</td> --}}
+																<td>{{ $dt->judul }}</td>
+																<td>{{ ucwords($dt->kategori) }}</td>
 																<td>{{ $dt->tipe }}</td>
+																<td>{{ \Carbon\Carbon::parse($dt->batas_waktu)->translatedFormat('d F Y') }}</td>
 																<td>
-																	@if ($dt->status == "1")
-																		<a href="{{ route('post-lowongan.create') }}" class="badge badge-rounded badge-outline-warning"><i class="fa fa-plus"></i> Posting</a>
+																	@if ($dt->status == "close")
+																		<span class="badge badge-rounded badge-outline-warning">Close</span>
 																	@else
-																		<span class="badge badge-rounded badge-outline-success"><i class="fa fa-check"></i> Posted</span>
+																		<span class="badge badge-rounded badge-outline-success">Open</span>
 																	@endif
 																</td>
 																<td>
@@ -89,10 +86,11 @@
 														<tfoot>
 																<tr>
 																	<th>No</th>
-																	<th width="20%">Perusahaan</th>
-																	<th width="25%">Lokasi</th>
-																	<th>Posisi</th>
-																	<th>Tipe Pekerjaan</th>
+																	{{-- <th>Perusahaan</th> --}}
+																	<th>Judul</th>
+																	<th>Kategori</th>
+																	<th>Tipe</th>
+																	<th>Batas Waktu</th>
 																	<th>Status</th>
 																	<th>Action</th>
 																</tr>

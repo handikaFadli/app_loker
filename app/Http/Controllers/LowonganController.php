@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Lowongan;
+use App\Models\Perusahaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LowonganController extends Controller
 {
@@ -31,10 +33,12 @@ class LowonganController extends Controller
      */
     public function create()
     {
+        $perusahaan = Perusahaan::first();
         return view(
             'admin.lowongan.create',
             [
                 'title' => 'Lowongan Pekerjaan',
+                'perusahaan' => $perusahaan
             ]
         );
     }
@@ -46,20 +50,42 @@ class LowonganController extends Controller
     {
         $request->validate(
             [
-                'perusahaan' => 'required',
-                'posisi' => 'required',
-                'lokasi' => 'required',
+                'perusahaan_id' => 'required',
+                'judul' => 'required',
+                'slug' => 'required',
+                'kategori' => 'required',
                 'tipe' => 'required',
+                'deskripsi' => 'required',
+                'batas_waktu' => 'required',
+                'status' => 'required',
+                'gambar' => 'required',
+                'gambar.*' => 'image|mimes:jpeg,png,jpg,svg,webp',
             ],
             [
-                'perusahaan.required' => 'Inputan perusahaan harus diisi',
-                'posisi.required' => 'Inputan posisi harus diisi',
-                'lokasi.required' => 'Inputan lokasi harus diisi',
+                'perusahaan_id.required' => 'Inputan perusahaan harus diisi',
+                'judul.required' => 'Inputan judul harus diisi',
+                'slug.required' => 'Inputan slug harus diisi',
+                'kategori.required' => 'Inputan kategori harus diisi',
                 'tipe.required' => 'Inputan tipe harus diisi',
+                'deskripsi.required' => 'Inputan deskripsi harus diisi',
+                'batas_waktu.required' => 'Inputan batas waktu harus diisi',
+                'status.required' => 'Inputan status harus diisi',
+                'gambar.required' => 'Inputan gambar harus diisi',
+                'gambar.image' => 'File gambar harus diisi dengan file jpeg, png, jpg, svg, webp',
             ]
         );
 
-        Lowongan::create($request->all());
+        $input = $request->all();
+
+        if ($request->hasFile("gambar")) {
+            $image = $request->file("gambar");
+            $destinationPath = "media/";
+            $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input["gambar"] = "$profileImage";
+        }
+
+        Lowongan::create($input);
 
         Alert::success('Data Lowongan', 'Berhasil Ditambahkan!');
         return redirect('/admin/lowongan');
@@ -78,11 +104,14 @@ class LowonganController extends Controller
      */
     public function edit(Lowongan $lowongan)
     {
+        $perusahaan = Perusahaan::where('id', $lowongan->perusahaan_id)->first();
+
         return view(
             'admin.lowongan.edit',
             [
                 'title' => 'Lowongan Pekerjaan',
-                'lowongan' => $lowongan
+                'lowongan' => $lowongan,
+                'perusahaan' => $perusahaan
             ]
         );
     }
@@ -94,20 +123,44 @@ class LowonganController extends Controller
     {
         $request->validate(
             [
-                'perusahaan' => 'required',
-                'posisi' => 'required',
-                'lokasi' => 'required',
+                'perusahaan_id' => 'required',
+                'judul' => 'required',
+                'slug' => 'required',
+                'kategori' => 'required',
                 'tipe' => 'required',
+                'deskripsi' => 'required',
+                'batas_waktu' => 'required',
+                'status' => 'required',
+                'gambar.*' => 'image|mimes:jpeg,png,jpg,svg,webp',
             ],
             [
-                'perusahaan.required' => 'Inputan perusahaan harus diisi',
-                'posisi.required' => 'Inputan posisi harus diisi',
-                'lokasi.required' => 'Inputan lokasi harus diisi',
+                'perusahaan_id.required' => 'Inputan perusahaan harus diisi',
+                'judul.required' => 'Inputan judul harus diisi',
+                'slug.required' => 'Inputan slug harus diisi',
+                'kategori.required' => 'Inputan kategori harus diisi',
                 'tipe.required' => 'Inputan tipe harus diisi',
+                'deskripsi.required' => 'Inputan deskripsi harus diisi',
+                'batas_waktu.required' => 'Inputan batas waktu harus diisi',
+                'status.required' => 'Inputan status harus diisi',
+                'gambar.image' => 'File gambar harus diisi dengan file jpeg, png, jpg, svg, webp',
             ]
         );
 
-        $lowongan->update($request->all());
+        $input = $request->all();
+
+        if ($request->hasFile("gambar")) {
+            File::delete('media/' . $lowongan->gambar);
+
+            $image = $request->file("gambar");
+            $destinationPath = "media/";
+            $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input["gambar"] = "$profileImage";
+        } else {
+            unset($input["gambar"]);
+        }
+
+        $lowongan->update($input);
 
         Alert::success('Data Lowongan', 'Berhasil Diubah!');
         return redirect('/admin/lowongan');
@@ -118,7 +171,10 @@ class LowonganController extends Controller
      */
     public function destroy(Lowongan $lowongan)
     {
+        File::delete('media/' . $lowongan->gambar);
+
         $lowongan->delete();
+
         Alert::success('Data Lowongan', 'Berhasil Dihapus!');
         return redirect('/admin/lowongan');
     }
