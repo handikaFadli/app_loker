@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Perusahaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PerusahaanController extends Controller
@@ -49,15 +50,29 @@ class PerusahaanController extends Controller
                 'nama' => 'required',
                 'lokasi' => 'required',
                 'deskripsi' => 'required',
+                'logo' => 'required',
+                'logo.*' => 'image|mimes:jpeg,png,jpg,svg,webp',
             ],
             [
                 'nama.required' => 'Inputan nama perusahaan harus diisi',
                 'lokasi.required' => 'Inputan lokasi harus diisi',
                 'deskripsi.required' => 'Inputan deskripsi harus diisi',
+                'logo.required' => 'Inputan logo harus diisi',
+                'logo.image' => 'File logo harus diisi dengan file jpeg, png, jpg, svg, webp',
             ]
         );
 
-        Perusahaan::create($request->all());
+        $input = $request->all();
+
+        if ($request->hasFile("logo")) {
+            $image = $request->file("logo");
+            $destinationPath = "media/";
+            $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input["logo"] = "$profileImage";
+        }
+
+        Perusahaan::create($input);
 
         Alert::success('Data Perusahaan', 'Berhasil Ditambahkan!');
         return redirect('/admin/perusahaan');
@@ -95,15 +110,31 @@ class PerusahaanController extends Controller
                 'nama' => 'required',
                 'lokasi' => 'required',
                 'deskripsi' => 'required',
+                'logo.*' => 'image|mimes:jpeg,png,jpg,svg,webp',
             ],
             [
                 'nama.required' => 'Inputan nama perusahaan harus diisi',
                 'lokasi.required' => 'Inputan lokasi harus diisi',
                 'deskripsi.required' => 'Inputan deskripsi harus diisi',
+                'logo.image' => 'File logo harus diisi dengan file jpeg, png, jpg, svg, webp',
             ]
         );
 
-        $perusahaan->update($request->all());
+        $input = $request->all();
+
+        if ($request->hasFile("logo")) {
+            File::delete('media/' . $perusahaan->logo);
+
+            $image = $request->file("logo");
+            $destinationPath = "media/";
+            $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input["logo"] = "$profileImage";
+        } else {
+            unset($input["logo"]);
+        }
+
+        $perusahaan->update($input);
 
         Alert::success('Data Perusahaan', 'Berhasil Diubah!');
         return redirect('/admin/perusahaan');
@@ -114,7 +145,10 @@ class PerusahaanController extends Controller
      */
     public function destroy(Perusahaan $perusahaan)
     {
+        File::delete('media/' . $perusahaan->logo);
+
         $perusahaan->delete();
+
         Alert::success('Data Perusahaan', 'Berhasil Dihapus!');
         return redirect('/admin/perusahaan');
     }

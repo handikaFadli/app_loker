@@ -54,7 +54,7 @@
 																<td width="35%">{{ $dt->deskripsi }}</td>
 																<td>
 																	<span class="justify-content-center">
-																		<a href="javascript:void()" class="mr-2" data-toggle="tooltip" data-placement="top" title="Detail">
+																		<a href="javascript:void()" class="mr-2" data-toggle="modal" data-target="#detail-{{ $dt->id }}">
 																			<i class="fa fa-eye color-muted"></i>
 																		</a>
 																		<a href="{{ route("perusahaan.edit", $dt->id) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Edit">
@@ -84,4 +84,9 @@
 				</div>
 		</div>
 	</div>
+
+@foreach ($data as $dtpr)
+  @include('admin.perusahaan.detail')
+@endforeach
+
 @endsection

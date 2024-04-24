@@ -30,7 +30,7 @@
 						</div>
 						<div class="card-body">
 							<div class="basic-form">
-								<form action="{{ route("perusahaan.store") }}" method="POST">
+								<form action="{{ route("perusahaan.store") }}" method="POST" enctype="multipart/form-data">
 									@csrf
 									<div class="form-row">
 											<div class="form-group col-md-6">
@@ -66,6 +66,54 @@
 											@enderror
 										</div>
 									</div>
+									<div class="form-row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="website">Link Website</label>
+												<input type="text" class="form-control" id="website" name="website" value="{{ old('website') }}">
+												@error('website')
+													<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+														*{{ $message }}
+													</div>
+												@enderror
+											</div>
+											<div class="form-group">
+												<label for="linkedin">Link Linkedin</label>
+												<input type="text" class="form-control" id="linkedin" name="linkedin" value="{{ old('linkedin') }}">
+												@error('linkedin')
+													<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+														*{{ $message }}
+													</div>
+												@enderror
+											</div>
+											<div class="form-group">
+												<label for="instagram">Link Instagram</label>
+												<input type="text" class="form-control" id="instagram" name="instagram" value="{{ old('instagram') }}">
+												@error('instagram')
+													<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+														*{{ $message }}
+													</div>
+												@enderror
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label for="logo">Logo Perusahaan</label>
+											<span class="text-danger">*</span>
+											<input type="file" id="logo" class="form-control" name="logo" accept="image/*" style="display: none;" onchange="previewAndHideOverlay(event)">
+											@error('logo')
+												<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+													*{{ $message }}
+												</div>
+											@enderror
+											<div class="img-output mt-1 mx-2" onclick="triggerFileInput()">
+												<img src="" id="output" width="110">
+												<div class="upload-overlay">
+													<i class="fa fa-upload"></i>
+													<p>Click to upload</p>
+												</div>
+											</div>
+										</div>
+									</div>
 									<div class="row mt-4 mx-1">
 										<a href="/admin/perusahaan" class="btn btn-rounded btn-light">
 											Back
@@ -81,4 +129,35 @@
 				</div>
 		</div>
 	</div>
+@endsection
+
+@section('script')
+	<!-- Input type File -->
+	<script>
+		function triggerFileInput() {
+				document.getElementById('logo').click();
+		}
+
+		function previewAndHideOverlay(event) {
+				let input = event.target;
+				let output = document.getElementById('output');
+				let overlay = input.parentElement.querySelector('.upload-overlay');
+
+				if (input.files && input.files[0]) {
+						let reader = new FileReader();
+						reader.onload = function(e) {
+								output.src = e.target.result;
+								// Mengubah style overlay menjadi none saat gambar dipilih
+								overlay.style.display = 'none';
+						}
+						reader.readAsDataURL(input.files[0]);
+				}
+		}
+
+		document.getElementById('logo').addEventListener('change', function() {
+				let overlay = this.parentElement.querySelector('.upload-overlay');
+				overlay.style.display = 'none';
+		});
+
+	</script>
 @endsection

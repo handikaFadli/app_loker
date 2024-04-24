@@ -16,7 +16,7 @@
 				<div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
 						<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-								<li class="breadcrumb-item active"><a href="javascript:void(0)">Lowongan</a></li>
+								<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ $title }}</a></li>
 						</ol>
 				</div>
 		</div>
@@ -58,7 +58,7 @@
 																{{-- <td>{{ $dt->nama }}</td> --}}
 																<td>{{ $dt->judul }}</td>
 																<td>{{ ucwords($dt->kategori) }}</td>
-																<td>{{ $dt->tipe }}</td>
+																<td>{{ ucwords($dt->tipe) }}</td>
 																<td>{{ \Carbon\Carbon::parse($dt->batas_waktu)->translatedFormat('d F Y') }}</td>
 																<td>
 																	@if ($dt->status == "close")

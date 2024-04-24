@@ -51,8 +51,8 @@ class LowonganController extends Controller
         $request->validate(
             [
                 'perusahaan_id' => 'required',
-                'judul' => 'required',
-                'slug' => 'required',
+                'judul' => 'required|unique:lowongan,judul',
+                'slug' => 'required|unique:lowongan,slug',
                 'kategori' => 'required',
                 'tipe' => 'required',
                 'deskripsi' => 'required',
@@ -64,7 +64,9 @@ class LowonganController extends Controller
             [
                 'perusahaan_id.required' => 'Inputan perusahaan harus diisi',
                 'judul.required' => 'Inputan judul harus diisi',
+                'judul.unique' => 'Judul sudah terdaftar, mohon pilih judul yang lain',
                 'slug.required' => 'Inputan slug harus diisi',
+                'slug.unique' => 'Slug sudah terdaftar, mohon pilih slug yang lain',
                 'kategori.required' => 'Inputan kategori harus diisi',
                 'tipe.required' => 'Inputan tipe harus diisi',
                 'deskripsi.required' => 'Inputan deskripsi harus diisi',

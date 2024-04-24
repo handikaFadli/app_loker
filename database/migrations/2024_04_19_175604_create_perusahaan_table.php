@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('nama', 255);
             $table->string('lokasi', 255);
             $table->text('deskripsi');
+            $table->string('website', 255)->nullable();
+            $table->string('linkedin', 255)->nullable();
+            $table->string('instagram', 255)->nullable();
+            $table->text('logo');
             $table->timestamps();
         });
     }
