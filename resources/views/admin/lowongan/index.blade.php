@@ -43,7 +43,7 @@
 																		<th>Judul</th>
 																		<th>Kategori</th>
 																		<th>Tipe</th>
-																		<th>Batas Waktu</th>
+																		{{-- <th>Batas Waktu</th> --}}
 																		<th>Status</th>
 																		<th>Action</th>
 																</tr>
@@ -59,7 +59,7 @@
 																<td>{{ $dt->judul }}</td>
 																<td>{{ ucwords($dt->kategori) }}</td>
 																<td>{{ ucwords($dt->tipe) }}</td>
-																<td>{{ \Carbon\Carbon::parse($dt->batas_waktu)->translatedFormat('d F Y') }}</td>
+																{{-- <td>{{ \Carbon\Carbon::parse($dt->batas_waktu)->translatedFormat('d F Y') }}</td> --}}
 																<td>
 																	@if ($dt->status == "close")
 																		<span class="badge badge-rounded badge-outline-warning">Close</span>
@@ -90,7 +90,7 @@
 																	<th>Judul</th>
 																	<th>Kategori</th>
 																	<th>Tipe</th>
-																	<th>Batas Waktu</th>
+																	{{-- <th>Batas Waktu</th> --}}
 																	<th>Status</th>
 																	<th>Action</th>
 																</tr>

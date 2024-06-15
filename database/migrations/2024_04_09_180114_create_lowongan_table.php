@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('kategori', 255);
             $table->string('tipe', 99)->default('full time');
             $table->text('deskripsi');
-            $table->date('batas_waktu');
             $table->text('informasi')->nullable();
             $table->char('status', 5)->default('close');
             $table->string('gambar', 255);

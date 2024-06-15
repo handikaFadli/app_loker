@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('website', 255)->nullable();
             $table->string('linkedin', 255)->nullable();
             $table->string('instagram', 255)->nullable();
-            $table->text('logo');
+            $table->string('logo', 255);
             $table->timestamps();
         });
     }

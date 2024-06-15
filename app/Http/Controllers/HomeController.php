@@ -10,10 +10,22 @@ class HomeController extends Controller
 {
     public function index()
     {
-
+        $lowongan = Lowongan::with('perusahaan')->get();
         return view(
             'home',
-            []
+            ['lowongans' => $lowongan]
+        );
+    }
+
+    public function detail($slug)
+    {
+        $lowongan = Lowongan::with('perusahaan')->where('lowongan.slug', $slug)->first();
+
+        return view(
+            'detail',
+            [
+                'lowongan' => $lowongan
+            ]
         );
     }
 }

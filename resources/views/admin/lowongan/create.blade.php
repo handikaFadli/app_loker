@@ -137,7 +137,7 @@
 													@enderror
 												</div>
 												<div class="form-row">
-													<div class="form-group col-md-8">
+													{{-- <div class="form-group col-md-8">
 														<label for="batas_waktu">Batas Waktu</label>
 														<span class="text-danger">*</span>
 														<input type="text" class="form-control" name="batas_waktu" id="mdate" value="{{ old('batas_waktu') }}">
@@ -146,8 +146,8 @@
 																*{{ $message }}
 															</div>
 														@enderror
-													</div>
-													<div class="form-group col-md-4">
+													</div> --}}
+													<div class="form-group col-md">
 														<label for="status">Status</label>
 														<span class="text-danger">*</span>
 														<select id="inlineFormCustomSelect" name="status" class="form-control custom-select">
