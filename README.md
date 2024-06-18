@@ -1,3 +1,4 @@
+```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffcccc', 'primaryBorderColor': '#ff6666', 'primaryTextColor': '#000000', 'actorBorderColor': '#6666ff', 'actorTextColor': '#000000'}}}%%
 usecaseDiagram
 actor Pelamar
