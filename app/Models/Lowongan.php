@@ -13,9 +13,13 @@ class Lowongan extends Model
 
     protected $guarded = ['id'];
 
-    // relasi dgn tabel perusahaan
     public function perusahaan()
     {
         return $this->belongsTo(Perusahaan::class, 'perusahaan_id', 'id');
+    }
+
+    public function lamaran()
+    {
+        return $this->hasMany(Lamaran::class, 'lowongan_id');
     }
 }

@@ -256,28 +256,6 @@
           <!-- Single Job -->
           <div class="single-job wow fadeInUp" data-wow-delay=".3s">
             <div class="job-image">
-              <img src="{{ asset('assets_landing/images/jobs/img2.png') }}" alt="#" />
-            </div>
-            <div class="job-content">
-              <h4><a href="job-details.html">Graphics Design</a></h4>
-              <p>We are looking for Enrollment Advisors who are looking to take 30-35 appointments per week. All leads are pre-scheduled.</p>
-              <ul>
-                <li><i class="lni lni-website"></i><a href="#"> designhub.com</a></li>
-                <li><i class="lni lni-dollar"></i> $20k - $25k</li>
-                <li><i class="lni lni-map-marker"></i> Washington, USA</li>
-              </ul>
-            </div>
-            <div class="job-button">
-              <ul>
-                <li><a href="job-details.html">Apply</a></li>
-                <li><span>Intern</span></li>
-              </ul>
-            </div>
-          </div>
-          <!-- End Single Job -->
-          <!-- Single Job -->
-          <div class="single-job wow fadeInUp" data-wow-delay=".3s">
-            <div class="job-image">
               <img src="{{ asset('assets_landing/images/jobs/img3.png') }}" alt="#" />
             </div>
             <div class="job-content">
@@ -450,25 +428,24 @@
     </div>
     <div class="single-head">
       <div class="row">
-        
-        @foreach ($lowongans as $lowongan)
+        @foreach ($lowongan as $low)
         <div class="col-lg-4 col-md-6 col-12">
           <div class="single-job wow fadeInUp" data-wow-delay=".2s">
             <div class="shape"></div>
             <div class="feature">Featured</div>
             <div class="image">
-              <img src="{{ asset('media/'.$lowongan->gambar) }}" alt="#" />
+              <img src="{{ asset('media/'.$low->gambar) }}" alt="#" />
             </div>
             <div class="content">
-              <h4><a href="#">{{ $lowongan->judul }}</a></h4>
+              <h4><a href="#">{{ $low->judul }}</a></h4>
               <ul>
-                <li><i class="lni lni-map-marker"></i> {{ $lowongan->perusahaan->lokasi }}</li>
-                <li><i class="lni lni-briefcase"></i> {{ ucwords($lowongan->tipe) }}</li>
+                <li><i class="lni lni-map-marker"></i> {{ $low->perusahaan->lokasi }}</li>
+                <li><i class="lni lni-briefcase"></i> {{ ucwords($low->tipe) }}</li>
                 {{-- <li><i class="lni lni-dollar"></i> 80K-90K</li> --}}
               </ul>
-              <p>{{ $lowongan->deskripsi }}</p>
+              <p>{{ $low->deskripsi }}</p>
               <div class="button">
-                <a href="/detail/{{ $lowongan->slug }}" class="btn">Apply Now</a>
+                <a href="/detail/{{ $low->slug }}" class="btn">Apply Now</a>
                 <a href="bookmarked.html" class="btn save"><i class="lni lni-bookmark"></i> Save It</a>
               </div>
             </div>
@@ -630,136 +607,4 @@
 </div>
 <!-- End Clients Area -->
 
-<!-- Login Modal -->
-<div class="modal fade form-modal" id="login" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog max-width-px-840 position-relative">
-    <button type="button" class="circle-32 btn-reset bg-white pos-abs-tr mt-md-n6 mr-lg-n6 focus-reset z-index-supper" data-dismiss="modal"><i class="lni lni-close"></i></button>
-    <div class="login-modal-main">
-      <div class="row no-gutters">
-        <div class="col-12">
-          <div class="row">
-            <div class="heading">
-              <h3>Login From Here</h3>
-              <p>
-                Log in to continue your account <br />
-                and explore new jobs.
-              </p>
-            </div>
-            <div class="social-login">
-              <ul>
-                <li>
-                  <a class="linkedin" href="#"><i class="lni lni-linkedin-original"></i> Log in with LinkedIn</a>
-                </li>
-                <li>
-                  <a class="google" href="#"><i class="lni lni-google"></i> Log in with Google</a>
-                </li>
-                <li>
-                  <a class="facebook" href="#"><i class="lni lni-facebook-original"></i> Log in with Facebook</a>
-                </li>
-              </ul>
-            </div>
-            <div class="or-devider">
-              <span>Or</span>
-            </div>
-            <form action="/">
-              <div class="form-group">
-                <label for="email" class="label">E-mail</label>
-                <input type="email" class="form-control" placeholder="example@gmail.com" id="email" />
-              </div>
-              <div class="form-group">
-                <label for="password" class="label">Password</label>
-                <div class="position-relative">
-                  <input type="password" class="form-control" id="password" placeholder="Enter password" />
-                </div>
-              </div>
-              <div class="form-group d-flex flex-wrap justify-content-between">
-                <!-- Default checkbox -->
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                  <label class="form-check-label" for="flexCheckDefault">Remember password</label>
-                </div>
-                <a href="" class="font-size-3 text-dodger line-height-reset">Forget Password</a>
-              </div>
-              <div class="form-group mb-8 button">
-                <button class="btn">Log in</button>
-              </div>
-              <p class="text-center create-new-account">Don’t have an account? <a href="#">Create a free account</a></p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End Login Modal -->
-
-<!-- Signup Modal -->
-<div class="modal fade form-modal" id="signup" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog max-width-px-840 position-relative">
-    <button type="button" class="circle-32 btn-reset bg-white pos-abs-tr mt-md-n6 mr-lg-n6 focus-reset z-index-supper" data-dismiss="modal"><i class="lni lni-close"></i></button>
-    <div class="login-modal-main">
-      <div class="row no-gutters">
-        <div class="col-12">
-          <div class="row">
-            <div class="heading">
-              <h3>
-                Create a free Account <br />
-                Today
-              </h3>
-              <p>
-                Create your account to continue <br />
-                and explore new jobs.
-              </p>
-            </div>
-            <div class="social-login">
-              <ul>
-                <li>
-                  <a class="linkedin" href="#"><i class="lni lni-linkedin-original"></i> Import from LinkedIn</a>
-                </li>
-                <li>
-                  <a class="google" href="#"><i class="lni lni-google"></i> Import from Google</a>
-                </li>
-                <li>
-                  <a class="facebook" href="#"><i class="lni lni-facebook-original"></i> Import from Facebook</a>
-                </li>
-              </ul>
-            </div>
-            <div class="or-devider">
-              <span>Or</span>
-            </div>
-            <form action="/">
-              <div class="form-group">
-                <label for="email" class="label">E-mail</label>
-                <input type="email" class="form-control" placeholder="example@gmail.com" />
-              </div>
-              <div class="form-group">
-                <label for="password" class="label">Password</label>
-                <div class="position-relative">
-                  <input type="password" class="form-control" placeholder="Enter password" />
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="password" class="label">Confirm Password</label>
-                <div class="position-relative">
-                  <input type="password" class="form-control" placeholder="Enter password" />
-                </div>
-              </div>
-              <div class="form-group d-flex flex-wrap justify-content-between">
-                <!-- Default checkbox -->
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" />
-                  <label class="form-check-label" for="flexCheckDefault">Agree to the <a href="#">Terms & Conditions</a></label>
-                </div>
-              </div>
-              <div class="form-group mb-8 button">
-                <button class="btn">Sign Up</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End Signup Modal -->
 @endsection

@@ -13,7 +13,7 @@ class HomeController extends Controller
         $lowongan = Lowongan::with('perusahaan')->get();
         return view(
             'home',
-            ['lowongans' => $lowongan]
+            ['lowongan' => $lowongan]
         );
     }
 

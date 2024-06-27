@@ -102,7 +102,7 @@
                       <a href="bookmarked.html" class="d-block btn"><i class="fa fa-heart-o mr-1"></i> Save Job</a>
                     </div>
                     <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
-                      <a href="job-details.html" class="d-block btn btn-alt">Apply Now</a>
+                      <a href="{{ route('apply', $lowongan->id) }}" class="d-block btn btn-alt">Apply Now</a>
                     </div>
                   </div>
                 </div>

@@ -38,6 +38,8 @@
       <i class="lni lni-chevron-up"></i>
     </a>
 
+    @include('sweetalert::alert')
+
     <!-- ========================= JS here ========================= -->
     <script src="{{ asset('assets_landing/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets_landing/js/wow.min.js') }}"></script>
@@ -95,5 +97,8 @@
         autoplayVideos: true,
       });
     </script>
+
+  @yield('script')
+
   </body>
 </html>

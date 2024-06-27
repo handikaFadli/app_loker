@@ -4,8 +4,242 @@
 		Admin App Loker
 @endsection
 
+@section('style')
+		<!-- style input type date -->
+    <link href="{{ asset('assets_admin/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet">
+@endsection
+
 @section('content-admin')
 <div class="container-fluid">
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+						<h2 class="card-title">Lengkapi Data Diri</h2>
+				</div>
+				<div class="card-body">
+					<div class="basic-form">
+						<form action="{{ route("lowongan.store") }}" method="POST" enctype="multipart/form-data">
+							@csrf
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="nama_depan">Nama Depan</label>
+									<span class="text-danger">*</span>
+									<input type="text" class="form-control" id="nama_depan" name="nama_depan" value="{{ old('nama_depan') }}">
+									@error('nama_depan')
+										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+											*{{ $message }}
+										</div>
+									@enderror
+								</div>
+								<div class="form-group col-md-6">
+									<label for="nama_belakang">Nama Belakang</label>
+									<span class="text-danger">*</span>
+									<input type="text" class="form-control" id="nama_belakang" name="nama_belakang" value="{{ old('nama_belakang') }}">
+									@error('nama_belakang')
+										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+											*{{ $message }}
+										</div>
+									@enderror
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="tempat_lahir">Tempat Lahir</label>
+									<span class="text-danger">*</span>
+									<input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}">
+									@error('tempat_lahir')
+										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+											*{{ $message }}
+										</div>
+									@enderror
+								</div>
+								<div class="form-group col-md-6">
+									<label for="tanggal_lahir">Tanggal Lahir</label>
+									<span class="text-danger">*</span>
+									<input type="text" class="form-control" name="tanggal_lahir" id="mdate" value="{{ old('tanggal_lahir') }}">
+									@error('tanggal_lahir')
+										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+											*{{ $message }}
+										</div>
+									@enderror
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-3">
+									<label for="jenis_kelamin">Jenis Kelamin</label>
+									<span class="text-danger">*</span>
+									<select id="inlineFormCustomSelect" name="jenis_kelamin" class="form-control custom-select">
+										<option value="0" hidden disabled selected>Pilih</option>
+										@if (old('jenis_kelamin') == "Laki-laki")
+											<option value="Laki-laki" selected>Laki-laki</option>
+										@elseif (old('jenis_kelamin') == "Perempuan")
+											<option value="Perempuan" selected>Perempuan</option>
+										@else
+											<option value="Laki-laki">Laki-laki</option>
+											<option value="Perempuan">Perempuan</option>
+										@endif
+									</select>
+									@error('jenis_kelamin')
+										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+											*{{ $message }}
+										</div>
+									@enderror
+								</div>
+								<div class="form-group col-md-3">
+									<label for="status">Status</label>
+									<span class="text-danger">*</span>
+									<input type="text" class="form-control" id="status" name="status" value="{{ old('status') }}">
+									@error('status')
+										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+											*{{ $message }}
+										</div>
+									@enderror
+								</div>
+								<div class="form-group col-md-6">
+									<label for="tempat_tinggal">Tempat Tinggal</label>
+									<span class="text-danger">*</span>
+									<input type="text" class="form-control" id="tempat_tinggal" name="tempat_tinggal" value="{{ old('tempat_tinggal') }}">
+									@error('tempat_tinggal')
+										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+											*{{ $message }}
+										</div>
+									@enderror
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="nomor_telepon">Nomor Telepon</label>
+										<span class="text-danger">*</span>
+										<input type="text" class="form-control" id="nomor_telepon" name="nomor_telepon" value="{{ old('nomor_telepon') }}">
+										@error('nomor_telepon')
+											<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+												*{{ $message }}
+											</div>
+										@enderror
+									</div>
+									<div class="form-group">
+										<label for="email">Email</label>
+										<span class="text-danger">*</span>
+										<input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}">
+										@error('email')
+											<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+												*{{ $message }}
+											</div>
+										@enderror
+									</div>
+									<div class="form-group">
+										<label for="linkedin">Linkedin</label>
+										<span class="text-danger">*</span>
+										<input type="text" class="form-control" id="linkedin" name="linkedin" value="{{ old('linkedin') }}">
+										@error('linkedin')
+											<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+												*{{ $message }}
+											</div>
+										@enderror
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="logo">Logo Perusahaan</label>
+									<span class="text-danger">*</span>
+									<input type="file" id="logo" class="form-control" name="logo" accept="image/*" style="display: none;" onchange="previewAndHideOverlay(event)">
+									@error('logo')
+										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+											*{{ $message }}
+										</div>
+									@enderror
+									<div class="img-output mt-1 mx-2" onclick="triggerFileInput()">
+										<img src="" id="output" width="110">
+										<div class="upload-overlay">
+											<i class="fa fa-upload"></i>
+											<p>Click to upload</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr>
+							<div class="form-row mt-4 pendidikan">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="nama_kampus">Kampus</label>
+										<span class="text-danger">*</span>
+										<input type="text" class="form-control" id="nama_kampus" name="nama_kampus" value="{{ old('nama_kampus') }}">
+										@error('nama_kampus')
+											<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+												*{{ $message }}
+											</div>
+										@enderror
+									</div>
+									<div class="form-group">
+										<label for="jurusan">Jurusan</label>
+										<span class="text-danger">*</span>
+										<input type="text" class="form-control" id="jurusan" name="jurusan" value="{{ old('jurusan') }}">
+										@error('jurusan')
+											<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+												*{{ $message }}
+											</div>
+										@enderror
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="IPK">IPK</label>
+											<span class="text-danger">*</span>
+											<input type="text" class="form-control" id="IPK" name="IPK" value="{{ old('IPK') }}">
+											@error('IPK')
+												<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+													*{{ $message }}
+												</div>
+											@enderror
+										</div>
+										<div class="form-group col-md-6">
+											<label for="gelar">Gelar</label>
+											<span class="text-danger">*</span>
+											<input type="text" class="form-control" id="gelar" name="gelar" value="{{ old('gelar') }}">
+											@error('gelar')
+												<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+													*{{ $message }}
+												</div>
+											@enderror
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="transkip_nilai">Transkip Nilai</label>
+											<span class="text-danger">*</span>
+											<input type="file" class="form-control" id="transkip_nilai" name="transkip_nilai" value="{{ old('transkip_nilai') }}">
+											@error('transkip_nilai')
+												<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+													*{{ $message }}
+												</div>
+											@enderror
+										</div>
+										<div class="form-group col-md-6">
+											<label for="ijazah">ijazah</label>
+											<span class="text-danger">*</span>
+											<input type="file" class="form-control" id="ijazah" name="ijazah" value="{{ old('ijazah') }}">
+											@error('ijazah')
+												<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+													*{{ $message }}
+												</div>
+											@enderror
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3 mx-1">
+								<button type="submit" class="btn btn-rounded btn-primary ml-2">
+									Save
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-lg-3 col-sm-6">
 			<div class="card">
@@ -558,5 +792,289 @@
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-xl-12 col-xxl-12">
+			<div class="card">
+				<div class="card-header">
+					<h4 class="card-title">Form step</h4>
+				</div>
+				<div class="card-body">
+					<form action="#" id="step-form-horizontal" class="step-form-horizontal">
+						<div>
+							<h4>Personal Info</h4>
+							<section>
+								<div class="row">
+									<div class="col-lg-6 mb-4">
+										<div class="form-group">
+											<label class="text-label">First Name*</label>
+											<input type="text" name="firstName" class="form-control" placeholder="Parsley" required />
+										</div>
+									</div>
+									<div class="col-lg-6 mb-4">
+										<div class="form-group">
+											<label class="text-label">Last Name*</label>
+											<input type="text" name="lastName" class="form-control" placeholder="Montana" required />
+										</div>
+									</div>
+									<div class="col-lg-12 mb-4">
+										<div class="form-group">
+											<label class="text-label">Email Address*</label>
+											<div class="input-group">
+												<input type="email" class="form-control" id="inputGroupPrepend2" aria-describedby="inputGroupPrepend2" placeholder="example@example.com.com" required />
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-12 mb-4">
+										<div class="form-group">
+											<label class="text-label">Phone Number*</label>
+											<div class="input-group">
+												<input type="text" name="phoneNumber" class="form-control" placeholder="(+1)408-657-9007" required />
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-12 mb-4">
+										<div class="form-group">
+											<label class="text-label">Where are you from*</label>
+											<input type="text" name="place" class="form-control" required />
+										</div>
+									</div>
+								</div>
+							</section>
+							<h4>Company Info</h4>
+							<section>
+								<div class="row">
+									<div class="col-lg-12 mb-4">
+										<div class="form-group">
+											<label class="text-label">Company Name*</label>
+											<input type="text" name="firstName" class="form-control" placeholder="Cellophane Square" required />
+										</div>
+									</div>
+									<div class="col-lg-12 mb-4">
+										<div class="form-group">
+											<label class="text-label">Company Email Address*</label>
+											<div class="input-group">
+												<input type="email" class="form-control" id="emial1" placeholder="example@example.com.com" required />
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-12 mb-4">
+										<div class="form-group">
+											<label class="text-label">Company Phone Number*</label>
+											<div class="input-group">
+												<input type="text" name="phoneNumber" class="form-control" placeholder="(+1)408-657-9007" required />
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-12 mb-4">
+										<div class="form-group">
+											<label class="text-label">Your position in Company*</label>
+											<input type="text" name="place" class="form-control" required />
+										</div>
+									</div>
+								</div>
+							</section>
+							<h4>Business Hours</h4>
+							<section>
+								<div class="row">
+									<div class="col-4 col-sm-3 mb-4">
+										<h4>Monday *</h4>
+									</div>
+									<div class="col-4 col-sm-3 mb-4">
+										<div class="form-group">
+											<input class="form-control" value="9.00" type="number" name="input1" id="input1" />
+										</div>
+									</div>
+									<div class="col-4 col-sm-3 mb-4">
+										<div class="form-group">
+											<input class="form-control" value="6.00" type="number" name="input2" id="input2" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-4 col-sm-3 mb-4">
+										<h4>Tuesday *</h4>
+									</div>
+									<div class="col-4 col-sm-3 mb-4">
+										<div class="form-group">
+											<input class="form-control" value="9.00" type="number" name="input3" id="input3" />
+										</div>
+									</div>
+									<div class="col-4 col-sm-3 mb-4">
+										<div class="form-group">
+											<input class="form-control" value="6.00" type="number" name="input4" id="input4" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-4 col-sm-3 mb-4">
+										<h4>Wednesday *</h4>
+									</div>
+									<div class="col-4 col-sm-3 mb-4">
+										<div class="form-group">
+											<input class="form-control" value="9.00" type="number" name="input5" id="input5" />
+										</div>
+									</div>
+									<div class="col-4 col-sm-3 mb-4">
+										<div class="form-group">
+											<input class="form-control" value="6.00" type="number" name="input6" id="input6" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-4 col-sm-3 mb-4">
+										<h4>Thrusday *</h4>
+									</div>
+									<div class="col-4 col-sm-3 mb-4">
+										<div class="form-group">
+											<input class="form-control" value="9.00" type="number" name="input7" id="input7" />
+										</div>
+									</div>
+									<div class="col-4 col-sm-3 mb-4">
+										<div class="form-group">
+											<input class="form-control" value="6.00" type="number" name="input8" id="input8" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-4 col-sm-3 mb-4">
+										<h4>Friday *</h4>
+									</div>
+									<div class="col-4 col-sm-3 mb-4">
+										<div class="form-group">
+											<input class="form-control" value="9.00" type="number" name="input9" id="input9" />
+										</div>
+									</div>
+									<div class="col-4 col-sm-3 mb-4">
+										<div class="form-group">
+											<input class="form-control" value="6.00" type="number" name="input10" id="input10" />
+										</div>
+									</div>
+								</div>
+							</section>
+							<h4>Email Setup</h4>
+							<section>
+								<div class="row emial-setup">
+									<div class="col-sm-3 col-6">
+										<div class="form-group">
+											<label for="mailclient11" class="mailclinet mailclinet-gmail">
+												<input type="radio" name="emailclient" id="mailclient11" />
+												<span class="mail-icon">
+													<i class="mdi mdi-google-plus" aria-hidden="true"></i>
+												</span>
+												<span class="mail-text">I'm using Gmail</span>
+											</label>
+										</div>
+									</div>
+									<div class="col-sm-3 col-6">
+										<div class="form-group">
+											<label for="mailclient12" class="mailclinet mailclinet-office">
+												<input type="radio" name="emailclient" id="mailclient12" />
+												<span class="mail-icon">
+													<i class="mdi mdi-office" aria-hidden="true"></i>
+												</span>
+												<span class="mail-text">I'm using Office</span>
+											</label>
+										</div>
+									</div>
+									<div class="col-sm-3 col-6">
+										<div class="form-group">
+											<label for="mailclient13" class="mailclinet mailclinet-drive">
+												<input type="radio" name="emailclient" id="mailclient13" />
+												<span class="mail-icon">
+													<i class="mdi mdi-google-drive" aria-hidden="true"></i>
+												</span>
+												<span class="mail-text">I'm using Drive</span>
+											</label>
+										</div>
+									</div>
+									<div class="col-sm-3 col-6">
+										<div class="form-group">
+											<label for="mailclient14" class="mailclinet mailclinet-another">
+												<input type="radio" name="emailclient" id="mailclient14" />
+												<span class="mail-icon">
+													<i class="fa fa-question-circle-o" aria-hidden="true"></i>
+												</span>
+												<span class="mail-text">Another Service</span>
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-12">
+										<div class="skip-email text-center">
+											<p>Or if want skip this step entirely and setup it later</p>
+											<a href="javascript:void()">Skip step</a>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+@endsection
+
+
+@section('script')
+
+	<!-- Input type Date -->
+	<script src="{{ asset('assets_admin/vendor/moment/moment.min.js') }}"></script>
+	<script src="{{ asset('assets_admin/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
+	<script src="{{ asset('assets_admin/js/plugins-init/material-date-picker-init.js') }}"></script>
+	<script>
+		function getTodayDate() {
+			let today = new Date();
+			let dd = String(today.getDate()).padStart(2, '0');
+			let mm = String(today.getMonth() + 1).padStart(2, '0');
+			let yyyy = today.getFullYear();
+
+			return yyyy + '-' + mm + '-' + dd;
+		}
+
+		document.addEventListener("DOMContentLoaded", function() {
+			let todayDate = getTodayDate();
+			document.getElementById("mdate").setAttribute("placeholder", todayDate);
+		});
+	</script>
+
+	<!-- Input type File -->
+	<script>
+		function triggerFileInput() {
+				document.getElementById('gambar').click();
+		}
+
+		function previewAndHideOverlay(event) {
+				let input = event.target;
+				let output = document.getElementById('output');
+				let overlay = input.parentElement.querySelector('.upload-overlay');
+
+				if (input.files && input.files[0]) {
+						let reader = new FileReader();
+						reader.onload = function(e) {
+								output.src = e.target.result;
+								// Mengubah style overlay menjadi none saat gambar dipilih
+								overlay.style.display = 'none';
+						}
+						reader.readAsDataURL(input.files[0]);
+				}
+		}
+
+		document.getElementById('gambar').addEventListener('change', function() {
+				let overlay = this.parentElement.querySelector('.upload-overlay');
+				overlay.style.display = 'none';
+		});
+
+	</script>
+
+	<!-- Trix Editor -->
+	<script>
+		document.addEventListener('trix-file-accept', function(e){
+						e.preventDefault();
+				})
+	</script>
+
 @endsection

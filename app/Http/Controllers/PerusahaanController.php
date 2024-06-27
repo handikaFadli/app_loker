@@ -49,14 +49,12 @@ class PerusahaanController extends Controller
             [
                 'nama' => 'required',
                 'lokasi' => 'required',
-                'deskripsi' => 'required',
                 'logo' => 'required',
                 'logo.*' => 'image|mimes:jpeg,png,jpg,svg,webp',
             ],
             [
                 'nama.required' => 'Inputan nama perusahaan harus diisi',
                 'lokasi.required' => 'Inputan lokasi harus diisi',
-                'deskripsi.required' => 'Inputan deskripsi harus diisi',
                 'logo.required' => 'Inputan logo harus diisi',
                 'logo.image' => 'File logo harus diisi dengan file jpeg, png, jpg, svg, webp',
             ]
@@ -109,13 +107,11 @@ class PerusahaanController extends Controller
             [
                 'nama' => 'required',
                 'lokasi' => 'required',
-                'deskripsi' => 'required',
                 'logo.*' => 'image|mimes:jpeg,png,jpg,svg,webp',
             ],
             [
                 'nama.required' => 'Inputan nama perusahaan harus diisi',
                 'lokasi.required' => 'Inputan lokasi harus diisi',
-                'deskripsi.required' => 'Inputan deskripsi harus diisi',
                 'logo.image' => 'File logo harus diisi dengan file jpeg, png, jpg, svg, webp',
             ]
         );

@@ -11,6 +11,21 @@
 			<li class="{{ Request::is('admin/lowongan*') ? 'mm-active' : '' }}">
 				<a href="/admin/lowongan" class="{{ Request::is('admin/lowongan*') ? 'mm-active' : '' }}" aria-expanded="false"><i class="icon icon-layout-25"></i><span class="nav-text">Lowongan</span></a>
 			</li>
+			<li class="{{ Request::is('admin/pelamar*') ? 'mm-active' : '' }}">
+				<a href="/admin/pelamar" class="{{ Request::is('admin/pelamar*') ? 'mm-active' : '' }}" aria-expanded="false"><i class="icon icon-layout-25"></i><span class="nav-text">Pelamar</span></a>
+			</li>
+			{{-- <li class="{{ Request::is('admin/lamaran*') ? 'mm-active' : '' }}">
+				<a href="/admin/lamaran" class="{{ Request::is('admin/lamaran*') ? 'mm-active' : '' }}" aria-expanded="false"><i class="icon icon-layout-25"></i><span class="nav-text">Lamaran</span></a>
+			</li> --}}
+			<li class="{{ Request::is('admin/lamaran/*') ? 'mm-active' : '' }}">
+				<a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon icon-layout-25"></i><span class="nav-text">Lamaran</span></a>
+				<ul aria-expanded="false">
+					<li><a class="{{ Request::is('admin/lamaran/tahap-awal*') ? 'mm-active' : '' }}" href="/admin/lamaran/tahap-awal">Tahap Awal</a></li>
+					<li><a class="{{ Request::is('admin/lamaran/tahap-dua*') ? 'mm-active' : '' }}" href="/admin/lamaran/tahap-dua">Tahap Dua</a></li>
+					<li><a {{ Request::is('admin/lamaran/tahap-akhir*') ? 'mm-active' : '' }} href="/admin/lamaran/tahap-akhir">Tahap Akhir</a></li>
+					<li><a class="{{ Request::is('admin/lamaran/riwayat*') ? 'mm-active' : '' }}" href="/admin/lamaran/riwayat">Riwayat</a></li>
+				</ul>
+			</li>
 			<li>
 				<a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon icon-layout-25"></i><span class="nav-text">Kelola User</span></a>
 				<ul aria-expanded="false">

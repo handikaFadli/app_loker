@@ -13,26 +13,33 @@
 							<span class="toggler-icon"></span>
 						</button>
 						<div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
-							<ul id="nav" class="navbar-nav ml-auto">
+							<ul id="nav" class="navbar-nav m-auto">
 								<li class="nav-item">
 									<a class="active" href="index.html">Home</a>
 								</li>
-								<li class="nav-item">
-									<a href="#">Pages</a>
+								<li class="nav-item"><a href="#">Tentang</a></li>
+								<li class="nav-item"><a href="#">Lowongan </a></li>
+								<li class="nav-item"><a href="#">Kontak</a></li>
+								{{-- <li class="nav-item">
+									<a href="#">
+										Profil
+									</a>
 									<ul class="sub-menu">
 										<li><a href="about-us.html">About Us</a></li>
 									</ul>
-								</li>
-								<li class="nav-item"><a href="#">Candidates</a></li>
-								<li class="nav-item"><a href="#">Employers </a></li>
-								<li class="nav-item"><a href="#">Blog</a></li>
-								<li class="nav-item"><a href="contact.html">Contact</a></li>
+								</li> --}}
 							</ul>
 						</div>
 						<!-- navbar collapse -->
 						<div class="button">
-							<a href="javacript:" data-toggle="modal" data-target="#login" class="login"><i class="lni lni-lock-alt"></i> Login</a>
-							<a href="javacript:" data-toggle="modal" data-target="#signup" class="btn">Sign Up</a>
+							@guest
+									<a href="/login" class="login"><i class="lni lni-lock-alt"></i> Login</a>
+									<a href="/register" class="btn">Sign Up</a>
+							@endguest
+
+							@auth
+									<a href="/profile/myprofile" class="login"><i class="lni lni-user"></i> Profil</a>
+							@endauth
 						</div>
 					</nav>
 					<!-- navbar -->

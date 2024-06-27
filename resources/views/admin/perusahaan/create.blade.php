@@ -57,7 +57,6 @@
 									<div class="form-row">
 										<div class="form-group col-md-12">
 											<label for="deskripsi">Deskripsi Perusahaan</label>
-											<span class="text-danger">*</span>
 											<textarea class="form-control" rows="5" id="deskripsi" name="deskripsi">{{ old('deskripsi') }}</textarea>
 											@error('deskripsi')
 												<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">

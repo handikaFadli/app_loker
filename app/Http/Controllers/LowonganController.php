@@ -33,7 +33,7 @@ class LowonganController extends Controller
      */
     public function create()
     {
-        $perusahaan = Perusahaan::first();
+        $perusahaan = Perusahaan::all();
         return view(
             'admin.lowongan.create',
             [

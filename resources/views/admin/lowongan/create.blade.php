@@ -47,18 +47,26 @@
 															<th>#</th>
 															<th>Perusahaan</th>
 															<th>Lokasi</th>
-															<th>Deskripsi</th>
+															{{-- <th>Deskripsi</th> --}}
 														</tr>
 													</thead>
 													<tbody>
-														<tr>
-															<td class="d-flex align-items-center">
-																	<input type="radio" name="perusahaan_id" value="{{ $perusahaan->id }}" checked>
-															</td>
-															<td>{{ $perusahaan->nama }}</td>
-															<td>{{ $perusahaan->lokasi }}</td>
-															<td>{{ $perusahaan->deskripsi }}</td>
+														@if ($perusahaan != null)
+														@foreach ($perusahaan as $per)
+															<tr>
+																	<td class="d-flex align-items-center justify-content-center text-center">
+																			<input type="radio" name="perusahaan_id" value="{{ $per->id }}">
+																	</td>
+																	<td>{{ $per->nama }}</td>
+																	<td>{{ $per->lokasi }}</td>
+																	{{-- <td>{{ $per->deskripsi }}</td> --}}
+															</tr>
+														@endforeach
+														@else
+														<tr class="text-center">
+															<td colspan="3">Silahkan tambahkan data perusahaan terlebih dahulu <a href="{{ route('perusahaan.create') }}"><i class="fa fa-plus-circle"></i></a></td>
 														</tr>
+														@endif
 													</tbody>
 												</table>
 											</div>

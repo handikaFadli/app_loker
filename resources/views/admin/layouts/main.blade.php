@@ -18,7 +18,10 @@
     <!-- Data tables -->
     <link href="{{ asset("assets_admin/vendor/datatables/css/jquery.dataTables.min.css") }}" rel="stylesheet">
 
-    <!-- Style -->
+    <!-- Form Wizard -->
+    <link href="{{ asset('assets_admin/vendor/jquery-steps/css/jquery.steps.css') }}" rel="stylesheet" />
+
+    <!-- Style Utama -->
     <link href="{{ asset('assets_admin/css/style.css') }}" rel="stylesheet" />
 
     <!-- Trix -->
@@ -138,6 +141,14 @@
     <!-- Data tables -->
     <script src="{{ asset("assets_admin/vendor/datatables/js/jquery.dataTables.min.js") }}"></script>
     <script src="{{ asset("assets_admin/js/plugins-init/datatables.init.js") }}"></script>
+
+    <!-- Form wizard -->
+    <script src="{{ asset("assets_admin/vendor/jquery-steps/build/jquery.steps.min.js") }}"></script>
+    <script src="{{ asset("assets_admin/vendor/jquery-validation/jquery.validate.min.js") }}"></script>
+    <!-- Form validate init -->
+    <script src="{{ asset("assets_admin/js/plugins-init/jquery.validate-init.js") }}"></script>
+    <!-- Form step init -->
+    <script src="{{ asset("assets_admin/js/plugins-init/jquery-steps-init.js") }}"></script>
     
 		@yield('script')
   </body>
