@@ -14,10 +14,7 @@
 							</div>
 					</div>
 					<div class="col-lg-2 col-md-2 d-flex align-items-center">
-						@php
-								\Carbon\Carbon::setLocale('id');
-						@endphp
-							<p>{{ \Carbon\Carbon::parse($lam->created_at)->translatedFormat('d F Y') }}</p>
+						<p>{{ \Carbon\Carbon::parse($lam->created_at)->format('d-m-Y, H.i') }} WIB</p>
 					</div>
 					<div class="col-lg-2 col-md-2 text-center d-flex align-items-center">
 							<p><span class="time">{{ ucwords($lam->status_lamaran) }}</span></p>

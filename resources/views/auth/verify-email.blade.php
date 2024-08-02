@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Email Verify</title>
     <!-- Favicon icon -->
-    {{-- <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png"> --}}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets_landing/images/logo/logo-tab.jpg') }}" />
     <!-- Web Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
@@ -30,11 +30,11 @@
           <div class="d-table-cell">
             <div class="container">
               <div class="success-content">
-                <h1>Congratulations!</h1>
-                <h2>Your Mail Sent Successfully</h2>
-                <p>Thanks for contacting with us, We will get back to you asap.</p>
+                {{-- <h1>Verifikasi Email</h1> --}}
+                <h2>Verifikasi Email Anda!</h2>
+                <p>Silakan cek email Anda, termasuk di bagian spam, untuk memverifikasi email Anda.</p>
                 <div class="button">
-                  <a href="index.html" class="btn">Go To Home</a>
+                  <a href="/" class="btn">Kembali ke Home</a>
                 </div>
               </div>
             </div>

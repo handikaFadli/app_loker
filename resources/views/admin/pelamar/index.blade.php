@@ -47,9 +47,9 @@ Portal Lowongan Kerja - {{ $title }}
 															@foreach ($data as $dt)
 															<tr>
 																<td>{{ $loop->iteration }}</td>
-																<td>{{ $dt->nama }}</td>
-																<td>{{ $dt->tempat_lahir .', '. \Carbon\Carbon::parse($dt->tanggal_lahir)->translatedFormat('d F Y') }}</td>
-																<td>{{ $dt->umur }} tahun</td>
+																<td>{{ $dt->nama ? $dt->nama : '-' }}</td>
+																<td>{{ $dt->tempat_lahir ? $dt->tempat_lahir .', '. \Carbon\Carbon::parse($dt->tanggal_lahir)->translatedFormat('d F Y') : '-' }}</td>
+																<td>{{ $dt->umur ? $dt->umur . ' tahun' : '-' }}</td>
 																<td>{{ $dt->email }}</td>
 																<td>
 																	<div class="dropdown">

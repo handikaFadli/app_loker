@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="col-lg-4 col-md-4 col-12">
 				<div class="name-head">
-					<a class="mb-2" href="/profile/myprofile"><img class="circle-54" width="90" src="{{ $user->foto ? $user->foto : asset('media/default.png') }}" alt="profile" /></a>
+					<a class="mb-2" href="/profile/myprofile"><img class="circle-54" width="90" src="{{ $user->foto ? $user->foto : asset('assets_landing/images/profile/default-profile.jpeg') }}" alt="profile" /></a>
 					<h4><a class="name" href="/profile/myprofile">{{ $user->nama ? ucwords($user->nama) : '-' }}</a></h4>
 					<p><a class="deg" href="{{ $user->email ? $user->email : '/' }}">{{ $user->email ? $user->email : '-' }}</a></p>
 					<ul class="social">

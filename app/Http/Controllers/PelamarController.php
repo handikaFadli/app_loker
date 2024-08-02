@@ -209,7 +209,7 @@ class PelamarController extends Controller
     {
         $pelamar = Pelamar::where('email', $request->email)->first();
 
-        Gate::authorize('updateProfile', $pelamar);
+        // Gate::authorize('updateProfile', $pelamar);
 
         if (!$pelamar) {
             return abort(403, 'Unauthorized action.');
