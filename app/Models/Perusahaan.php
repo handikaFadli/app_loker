@@ -12,4 +12,9 @@ class Perusahaan extends Model
     protected $table = 'perusahaan';
 
     protected $guarded = ['id'];
+
+    public function lowongan()
+    {
+        return $this->hasMany(Lowongan::class, 'perusahaan_id');
+    }
 }

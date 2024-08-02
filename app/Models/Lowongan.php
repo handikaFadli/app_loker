@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Lowongan extends Model
 {
@@ -15,7 +16,7 @@ class Lowongan extends Model
 
     public function perusahaan()
     {
-        return $this->belongsTo(Perusahaan::class, 'perusahaan_id', 'id');
+        return $this->belongsTo(Perusahaan::class, 'perusahaan_id');
     }
 
     public function lamaran()

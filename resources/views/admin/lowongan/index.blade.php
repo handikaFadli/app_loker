@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('title')
-	Admin App Loker - {{ $title }}
+Portal Lowongan Kerja - {{ $title }}
 @endsection
 
 @section('content-admin')
@@ -39,62 +39,50 @@
 														<thead>
 																<tr>
 																		<th>No</th>
-																		{{-- <th>Perusahaan</th> --}}
 																		<th>Judul</th>
 																		<th>Kategori</th>
 																		<th>Tipe</th>
-																		{{-- <th>Batas Waktu</th> --}}
+																		<th>Batas Akhir</th>
 																		<th>Status</th>
 																		<th>Action</th>
 																</tr>
 														</thead>
 														<tbody>
 															@foreach ($data as $dt)
-															@php
-																	\Carbon\Carbon::setLocale('id');
-															@endphp
 															<tr>
 																<td>{{ $loop->iteration }}</td>
-																{{-- <td>{{ $dt->nama }}</td> --}}
 																<td>{{ $dt->judul }}</td>
 																<td>{{ ucwords($dt->kategori) }}</td>
 																<td>{{ ucwords($dt->tipe) }}</td>
-																{{-- <td>{{ \Carbon\Carbon::parse($dt->batas_waktu)->translatedFormat('d F Y') }}</td> --}}
+																<td>{{ \Carbon\Carbon::parse($dt->batas_akhir)->translatedFormat('d F Y') }}</td>
 																<td>
 																	@if ($dt->status == "close")
-																		<span class="badge badge-rounded badge-outline-warning">Close</span>
+																		<span class="badge badge-rounded badge-outline-danger">Close</span>
 																	@else
-																		<span class="badge badge-rounded badge-outline-success">Open</span>
+																		<span class="badge badge-rounded badge-outline-primary">Open</span>
 																	@endif
 																</td>
 																<td>
-																	<span class="justify-content-center">
-																		<a href="javascript:void()" class="mr-2" data-toggle="tooltip" data-placement="top" title="Detail">
-																			<i class="fa fa-eye color-muted"></i>
-																		</a>
-																		<a href="{{ route("lowongan.edit", $dt->id) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Edit">
-																			<i class="fa fa-pencil color-muted"></i>
-																		</a>
-																		<a href="{{ route("lowongan.destroy", $dt->id) }}" data-toggle="tooltip" data-placement="top" title="Hapus" data-confirm-delete="true">
-																			X
-																		</a>
-																	</span>
+																	<div class="dropdown">
+																		<button type="button" class="btn btn-sm btn-outline-primary btn-rounded dropdown-toggle" data-toggle="dropdown">
+																				Action
+																		</button>
+																		<div class="dropdown-menu dropdown-menu-right">
+																			<a href="{{ route("lowongan.show", $dt->id) }}" class="dropdown-item text-muted">
+																				Detail
+																			</a>
+																			<a href="{{ route("lowongan.edit", $dt->id) }}" class="dropdown-item text-muted">
+																				Edit
+																			</a>
+																			<a href="{{ route('lowongan.destroy', $dt->id) }}" class="dropdown-item text-muted" data-confirm-delete="true">
+																				Delete
+																			</a>
+																		</div>
+																	</div>
 																</td>
 															</tr>
 															@endforeach
 														</tbody>
-														<tfoot>
-																<tr>
-																	<th>No</th>
-																	{{-- <th>Perusahaan</th> --}}
-																	<th>Judul</th>
-																	<th>Kategori</th>
-																	<th>Tipe</th>
-																	{{-- <th>Batas Waktu</th> --}}
-																	<th>Status</th>
-																	<th>Action</th>
-																</tr>
-														</tfoot>
 												</table>
 										</div>
 								</div>

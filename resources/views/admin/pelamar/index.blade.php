@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('title')
-		Admin App Loker - {{ $title }}
+Portal Lowongan Kerja - {{ $title }}
 @endsection
 
 @section('content-admin')
@@ -34,46 +34,46 @@
 																<tr>
 																		<th>No</th>
 																		<th>Nama</th>
-																		<th>Tanggal Lahir</th>
+																		<th>TTL</th>
 																		<th>Umur</th>
-																		<th>Status</th>
+																		<th>Email</th>
 																		<th>Action</th>
 																</tr>
 														</thead>
 														<tbody>
+															@php
+																	\Carbon\Carbon::setLocale('id');
+															@endphp
 															@foreach ($data as $dt)
 															<tr>
 																<td>{{ $loop->iteration }}</td>
 																<td>{{ $dt->nama }}</td>
-																<td>{{ $dt->tanggal_lahir }}</td>
-																<td>{{ $dt->umur }}</td>
-																<td>{{ $dt->status }}</td>
+																<td>{{ $dt->tempat_lahir .', '. \Carbon\Carbon::parse($dt->tanggal_lahir)->translatedFormat('d F Y') }}</td>
+																<td>{{ $dt->umur }} tahun</td>
+																<td>{{ $dt->email }}</td>
 																<td>
-																	<span class="justify-content-center">
-																		<a href="javascript:void()" class="mr-2" data-toggle="modal" data-target="#detail-{{ $dt->id }}">
-																			<i class="fa fa-eye color-muted"></i>
+																	<div class="dropdown">
+																	<button type="button" class="btn btn-sm btn-outline-primary btn-rounded dropdown-toggle" data-toggle="dropdown">
+																			Action
+																	</button>
+																	<div class="dropdown-menu dropdown-menu-right">
+																		<a href="{{ route("pelamar.show", $dt->id) }}" class="dropdown-item text-muted">
+																			Detail
 																		</a>
-																		<a href="{{ route("pelamar.edit", $dt->id) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Edit">
-																			<i class="fa fa-pencil color-muted"></i>
+																		@can('admin')
+																		<a href="{{ route("pelamar.edit", $dt->id) }}" class="dropdown-item text-muted">
+																			Edit
 																		</a>
-																		<a href="{{ route("pelamar.destroy", $dt->id) }}" data-toggle="tooltip" data-placement="top" title="Hapus" data-confirm-delete="true">
-																			X
+																		<a href="{{ route('pelamar.destroy', $dt->id) }}" class="dropdown-item text-muted" data-confirm-delete="true">
+																			Delete
 																		</a>
-																	</span>
+																		@endcan
+																	</div>
+																	</div>
 																</td>
 															</tr>
 															@endforeach
 														</tbody>
-														<tfoot>
-																<tr>
-																	<th>No</th>
-																	<th>Nama</th>
-																	<th>Tanggal Lahir</th>
-																	<th>Umur</th>
-																	<th>Status</th>
-																	<th>Action</th>
-																</tr>
-														</tfoot>
 												</table>
 										</div>
 								</div>

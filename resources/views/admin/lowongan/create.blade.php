@@ -1,12 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('title')
-		Admin App Loker - {{ $title }}
-@endsection
-
-@section('style')
-		<!-- style input type date -->
-    <link href="{{ asset('assets_admin/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet">
+Portal Lowongan Kerja - {{ $title }}
 @endsection
 
 @section('content-admin')
@@ -47,26 +42,16 @@
 															<th>#</th>
 															<th>Perusahaan</th>
 															<th>Lokasi</th>
-															{{-- <th>Deskripsi</th> --}}
 														</tr>
 													</thead>
 													<tbody>
-														@if ($perusahaan != null)
-														@foreach ($perusahaan as $per)
-															<tr>
-																	<td class="d-flex align-items-center justify-content-center text-center">
-																			<input type="radio" name="perusahaan_id" value="{{ $per->id }}">
-																	</td>
-																	<td>{{ $per->nama }}</td>
-																	<td>{{ $per->lokasi }}</td>
-																	{{-- <td>{{ $per->deskripsi }}</td> --}}
-															</tr>
-														@endforeach
-														@else
-														<tr class="text-center">
-															<td colspan="3">Silahkan tambahkan data perusahaan terlebih dahulu <a href="{{ route('perusahaan.create') }}"><i class="fa fa-plus-circle"></i></a></td>
+														<tr>
+															<td class="d-flex align-items-center">
+																	<input type="radio" name="perusahaan_id" value="{{ $perusahaan->id }}" checked>
+															</td>
+															<td>{{ $perusahaan->nama }}</td>
+															<td>{{ $perusahaan->lokasi }}</td>
 														</tr>
-														@endif
 													</tbody>
 												</table>
 											</div>
@@ -96,6 +81,18 @@
 									</div>
 									<div class="form-row">
 										<div class="form-group col-md-12">
+											<label for="informasi">Informasi Lowongan</label>
+											<span class="text-danger">*</span>
+											<input type="text" class="form-control" id="informasi" name="informasi" value="{{ old('informasi', 'Kami UCIC, hadir untuk mencari kandidat dosen terbaik jurusan') }}">
+											@error('informasi')
+												<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+													*{{ $message }}
+												</div>
+											@enderror
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-12">
 											<label for="deskripsi">Deskripsi Pekerjaan</label>
 											<span class="text-danger">*</span>
 											<textarea class="form-control" rows="5" id="deskripsi" name="deskripsi">{{ old('deskripsi') }}</textarea>
@@ -111,7 +108,7 @@
 												<div class="form-group">
 													<label for="kategori">Kategori</label>
 													<span class="text-danger">*</span>
-													<input type="text" class="form-control" id="kategori" name="kategori" value="{{ old('kategori') }}">
+													<input type="text" class="form-control" id="kategori" name="kategori" value="{{ old('kategori') }}" placeholder="cth: Dosen FTI, Staff">
 													@error('kategori')
 														<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
 															*{{ $message }}
@@ -145,28 +142,28 @@
 													@enderror
 												</div>
 												<div class="form-row">
-													{{-- <div class="form-group col-md-8">
-														<label for="batas_waktu">Batas Waktu</label>
+													<div class="form-group col-md-6">
+														<label for="batas_akhir">Batas Akhir Pendaftaran</label>
 														<span class="text-danger">*</span>
-														<input type="text" class="form-control" name="batas_waktu" id="mdate" value="{{ old('batas_waktu') }}">
-														@error('batas_waktu')
+														<input type="date" class="form-control" name="batas_akhir" value="{{ old('batas_akhir') }}">
+														@error('batas_akhir')
 															<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
 																*{{ $message }}
 															</div>
 														@enderror
-													</div> --}}
-													<div class="form-group col-md">
+													</div>
+													<div class="form-group col-md-6">
 														<label for="status">Status</label>
 														<span class="text-danger">*</span>
 														<select id="inlineFormCustomSelect" name="status" class="form-control custom-select">
 															<option value="0" hidden disabled selected>Pilih</option>
 															@if (old('status') == "close")
-															<option value="close" selected>close</option>
+															<option value="close" selected>Close</option>
 															@elseif (old('status') == "open")
-															<option value="open" selected>open</option>
+															<option value="open" selected>Open</option>
 															@else
-															<option value="close">close</option>
-															<option value="open">open</option>
+															<option value="open">Open</option>
+															<option value="close">Close</option>
 															@endif
 														</select>
 														@error('status')
@@ -178,7 +175,7 @@
 												</div>
 											</div>
 											<div class="form-group col-md-6">
-												<label for="gambar">Gambar</label>
+												<label for="gambar">Poster</label>
 												<span class="text-danger">*</span>
 												<input type="file" id="gambar" class="form-control" name="gambar" accept="image/*" style="display: none;" onchange="previewAndHideOverlay(event)">
 												@error('gambar')
@@ -197,10 +194,10 @@
 									</div>
 									<div class="form-row">
 											<div class="form-group col-md-12">
-												<label for="informasi">Informasi Lainnya</label>
-												<input id="informasi" type="hidden" name="informasi" value="{{ old('informasi') }}">
-												<trix-editor input="informasi"></trix-editor>
-												@error('informasi')
+												<label for="persyaratan">Informasi Persyaratan</label>
+												<input id="persyaratan" type="hidden" name="persyaratan" value="{{ old('persyaratan') }}">
+												<trix-editor input="persyaratan"></trix-editor>
+												@error('persyaratan')
 													<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
 														*{{ $message }}
 													</div>
@@ -228,23 +225,6 @@
 
 	<!-- Input type Date -->
 	<script src="{{ asset('assets_admin/vendor/moment/moment.min.js') }}"></script>
-	<script src="{{ asset('assets_admin/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
-	<script src="{{ asset('assets_admin/js/plugins-init/material-date-picker-init.js') }}"></script>
-	<script>
-		function getTodayDate() {
-			let today = new Date();
-			let dd = String(today.getDate()).padStart(2, '0');
-			let mm = String(today.getMonth() + 1).padStart(2, '0');
-			let yyyy = today.getFullYear();
-
-			return yyyy + '-' + mm + '-' + dd;
-		}
-
-		document.addEventListener("DOMContentLoaded", function() {
-			let todayDate = getTodayDate();
-			document.getElementById("mdate").setAttribute("placeholder", todayDate);
-		});
-	</script>
 	
 	<!-- Input Post Slug -->
 	<script>

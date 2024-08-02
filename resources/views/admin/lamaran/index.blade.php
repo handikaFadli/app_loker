@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('title')
-		Admin App Loker - {{ $title }}
+Portal Lowongan Kerja - {{ $title }}
 @endsection
 
 @section('content-admin')
@@ -24,7 +24,13 @@
 			<div class="col-12">
 					<div class="card">
 							<div class="card-header justify-content-between">
-									<h4 class="card-title">Daftar</h4>
+									<h4 class="card-title">Daftar Riwayat Lamaran</h4>
+									<a href="{{ route('lamaran.print') }}" target="_blank" class="btn btn-sm btn-rounded btn-primary">
+										<span class="btn-icon-left text-primary">
+											<i class="fa fa-print"></i>
+										</span>
+										Print
+									</a>
 							</div>
 							<div class="card-body">
 									<div class="table-responsive">
@@ -42,15 +48,28 @@
 														@foreach ($data as $dt)
 														<tr>
 															<td>{{ $loop->iteration }} </td>
-															<td>{{ $dt->pelamar->nama }}</td>
+															<td>{{ ucwords($dt->pelamar->nama) }}</td>
 															<td>{{ $dt->lowongan->judul }}</td>
-															<td>{{ $dt->status_lamaran }}</td>
+															<td>{{ ucwords($dt->status_lamaran) }}</td>
 															<td>
-																<span class="justify-content-center">
-																	<a href="/admin/lamaran/detail/{{ $dt->id }}" data-toggle="tooltip" data-placement="top" title="Detail">
-																		<i class="fa fa-info-circle color-muted"></i> Detail
-																	</a>
-																</span>
+																<div class="dropdown">
+																	<button type="button" class="btn btn-sm btn-outline-primary btn-rounded dropdown-toggle" data-toggle="dropdown">
+																			Action
+																	</button>
+																	<div class="dropdown-menu dropdown-menu-right">
+																		<a href="/admin/lamaran/detail/{{ $dt->id }}" class="dropdown-item text-muted">
+																			Detail
+																		</a>
+																		@can('admin')
+																			<a href="javascript:void()" class="dropdown-item text-muted" data-toggle="modal" data-target="#edit-{{ $dt->id }}">
+																				Edit
+																			</a>
+																			<a href="{{ route('lamaran.destroy', $dt->id) }}" class="dropdown-item text-muted" data-confirm-delete="true">
+																				Delete
+																			</a>
+																		@endcan
+																	</div>
+																</div>
 															</td>
 														</tr>
 														@endforeach
@@ -62,4 +81,7 @@
 			</div>
 		</div>
 	</div>
+	@foreach ($data as $dtlm)
+  	@include('admin.lamaran.modal')
+	@endforeach
 @endsection

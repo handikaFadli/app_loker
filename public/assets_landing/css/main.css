@@ -889,7 +889,7 @@ ol {
     position: relative;
     padding: 70px 0;
     padding-top: 150px;
-    background-image: url("../images/breadcrumb/breadcrumb-bg.jpg");
+    background-image: url("../images/hero/hero.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -2264,9 +2264,9 @@ ol {
 .job-search-wrap-two .job-search-form form .single-field-item {
     position: relative;
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 37%;
-    flex: 0 0 37%;
-    max-width: 37%;
+    -ms-flex: 0 0 80%;
+    flex: 0 0 80%;
+    width: 80%;
     padding: 0 30px;
     height: 100%;
     margin-bottom: 0;
@@ -4283,7 +4283,7 @@ blockquote .shape {
 }
 
 .featured-job .single-job .content .button .btn {
-    padding: 12px 34px;
+    padding: 12px 35px;
     margin-right: 10px;
 }
 
@@ -4902,7 +4902,7 @@ blockquote .shape {
 .profile .job-items .manage-content .time {
     background: #2042e314;
     color: #2042e3;
-    padding: 5px 14px;
+    padding: 10px 10px;
     border-radius: 3px;
     font-size: 13px;
 }
@@ -5869,39 +5869,39 @@ blockquote .shape {
 /*======================================
     Change Password CSS
 ========================================*/
-.change-password {
+.profile {
     background-color: #f6f9fc;
 }
 
-.change-password .password-content {
+.profile .password-content {
     padding: 30px;
     background-color: #fff;
     border: 1px solid #eee;
     border-radius: 6px;
 }
 
-.change-password .password-content h3 {
+.profile .password-content h3 {
     font-size: 22px;
     font-weight: 700;
 }
 
-.change-password .password-content p {
+.profile .password-content p {
     display: block;
     margin-top: 5px;
 }
 
-.change-password .password-content form {
+.profile .password-content form {
     margin-top: 30px;
 }
 
-.change-password .password-content form label {
+.profile .password-content form label {
     color: #081828;
     font-size: 14px;
     display: block;
     margin-bottom: 5px;
 }
 
-.change-password .password-content form input {
+.profile .password-content form input {
     height: 50px;
     width: 100%;
     border: 1px solid #eee;
@@ -5910,11 +5910,11 @@ blockquote .shape {
     font-size: 14px;
 }
 
-.change-password .password-content .form-group {
+.profile .password-content .form-group {
     margin-bottom: 15px;
 }
 
-.change-password .password-content .button .btn {
+.profile .password-content .button .btn {
     padding: 12px 25px;
 }
 

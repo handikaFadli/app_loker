@@ -7,15 +7,13 @@
         <div class="row">
           <div class="col-12">
             <div class="breadcrumbs-content">
-              <h1 class="page-title">About Us</h1>
-              <p>
-                Business plan draws on a wide range of knowledge from different business<br />
-                disciplines. Business draws on a wide range of different business .
-              </p>
+              <h1 class="page-title">Detail Lowongan</h1>
+              <p>Temukan informasi lengkap mengenai lowongan pekerjaan yang tersedia.<br>Baca deskripsi pekerjaan, persyaratan untuk posisi yang Anda minati.</p>
             </div>
             <ul class="breadcrumb-nav">
-              <li><a href="index.html">Home</a></li>
-              <li>About Us</li>
+              <li><a href="/">Home</a></li>
+							<li><a href="/lowongan">Lowongan</a></li>
+              <li>Detail Lowongan</li>
             </ul>
           </div>
         </div>
@@ -31,11 +29,11 @@
             <div class="job-details-inner">
               <div class="job-details-head row mx-0">
                 <div class="company-logo col-auto">
-                  <a href="#" style="border-radius: 4px; overflow: hidden"><img src="{{ asset('media/'.$lowongan->perusahaan->logo) }}" alt="Company Logo" width="100" /></a>
+                  <a href="{{ $lowongan->perusahaan->website }}" style="border-radius: 4px; overflow: hidden"><img src="{{ $lowongan->perusahaan->logo }}" alt="Company Logo" width="100" /></a>
                 </div>
                 <div class="salary-type col-auto order-sm-3">
                   <span class="salary-range">
-                    {{ ucwords($lowongan->status) }}
+                    {{ \Carbon\Carbon::parse($lowongan->batas_akhir)->format('d/m/Y') }}
                   </span>
                   <span class="badge badge-success">{{ ucwords($lowongan->tipe) }}</span>
                 </div>
@@ -50,9 +48,10 @@
                 </div>
               </div>
               <div class="job-details-body">
-                <h6 class="mb-3">Job Description</h6>
+                <h6 class="mb-3">Deskripsi</h6>
                 <p>{{ $lowongan->deskripsi }}</p>
-                <h6 class="mb-3 mt-4">Responsibilities</h6>
+                {!! $lowongan->persyaratan !!}
+                {{-- <h6 class="mb-3 mt-4">Responsibilities</h6>
                 <ul>
                   <li>Proven work experienceas a web designer</li>
                   <li>Demonstrable graphic design skills with a strong portfolio</li>
@@ -64,29 +63,7 @@
                   <li>Proven work experienceas a web designer</li>
                   <li>Up-to-date with the latest Web trends, techniques and technologies</li>
                   <li>BS/MS in Human-Computer Interaction, Interaction Design or a Visual Arts subject</li>
-                </ul>
-                <h6 class="mb-3 mt-4">Education + Experience</h6>
-                <ul>
-                  <li>Advanced degree or equivalent experience in graphic and web design</li>
-                  <li>3 or more years of professional design experience</li>
-                  <li>Direct response email experience</li>
-                  <li>Ecommerce website design experience</li>
-                  <li>Familiarity with mobile and web apps preferred</li>
-                  <li>Excellent communication skills, most notably a demonstrated ability to solicit and address creative and design feedback</li>
-                  <li>Must be able to work under pressure and meet deadlines while maintaining a positive attitude and providing exemplary customer service</li>
-                  <li>Ability to work independently and to carry out assignments to completion within parameters of instructions given, prescribed routines, and standard accepted practices</li>
-                </ul>
-                <h6 class="mb-3 mt-4">Benefits</h6>
-                <ul>
-                  <li>Medical insurance</li>
-                  <li>Dental insurance</li>
-                  <li>Vision insurance</li>
-                  <li>Supplemental benefits (Short Term Disability, Cancer & Accident).</li>
-                  <li>Employer-sponsored Basic Life & AD&D Insurance</li>
-                  <li>Employer-sponsored Long Term Disability</li>
-                  <li>Employer-sponsored Value Adds – Fresh Beanies</li>
-                  <li>401(k)with matching</li>
-                </ul>
+                </ul> --}}
               </div>
             </div>
           </div>
@@ -99,17 +76,19 @@
                 <div class="inner">
                   <div class="row m-n2 button">
                     <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
-                      <a href="bookmarked.html" class="d-block btn"><i class="fa fa-heart-o mr-1"></i> Save Job</a>
-                    </div>
-                    <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
-                      <a href="{{ route('apply', $lowongan->id) }}" class="d-block btn btn-alt">Apply Now</a>
+                      <form action="{{ route('apply') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="lowongan_id" value="{{ $lowongan->id }}">
+                        <button type="submit" class="d-block btn btn-primary">Apply Sekarang</button>
+                      </form>
+                      {{-- <a href="{{ route('apply', $lowongan->id) }}" class="d-block btn btn-primary">Apply Sekarang</a> --}}
                     </div>
                   </div>
                 </div>
               </div>
               <!-- Sidebar (Apply Buttons) End -->
               <!-- Sidebar (Job Overview) Start -->
-              <div class="sidebar-widget">
+              {{-- <div class="sidebar-widget">
                 <div class="inner">
                   <h6 class="title">Job Overview</h6>
                   <ul class="job-overview list-unstyled">
@@ -127,16 +106,16 @@
                     <li><strong>Application Deadline:</strong> Dec 15, 2023</li>
                   </ul>
                 </div>
-              </div>
+              </div> --}}
               <!-- Sidebar (Job Overview) End -->
 
               <!-- Sidebar (Job Location) Start -->
               <div class="sidebar-widget">
                 <div class="inner">
-                  <h6 class="title">Job Location</h6>
+                  <h6 class="title">Lokasi</h6>
                   <div class="mapouter">
                     <div class="gmap_canvas">
-                      <iframe width="100%" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=New%20York&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://123movies-to.com/">123movies old site</a>
+                      <iframe width="100%" height="300" id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.2963663289993!2d108.55051270935574!3d-6.733651993234402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f1d8ebc133e3f%3A0x91385801f5822049!2sUniversitas%20Catur%20Insan%20Cendekia%20(CIC)!5e0!3m2!1sid!2ssg!4v1720204950522!5m2!1sid!2ssg" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.cic.ac.id/">Universitas Catur Insan Cendekia</a>
                       <style>
                         .mapouter {
                           position: relative;

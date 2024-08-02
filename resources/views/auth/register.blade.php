@@ -52,7 +52,7 @@
                                             @enderror
                                         </div>
                                         <div class="text-center mt-4">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign me up</button>
+                                            <button type="submit" class="btn btn-outline-dark btn-block">Sign me up</button>
                                         </div>
                                     </form>
                                     <div class="new-account mt-3">

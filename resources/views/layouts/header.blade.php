@@ -15,11 +15,11 @@
 						<div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
 							<ul id="nav" class="navbar-nav m-auto">
 								<li class="nav-item">
-									<a class="active" href="index.html">Home</a>
+									<a class="{{ Request::is('/') ? 'active' : '' }}" href="/">Home</a>
 								</li>
-								<li class="nav-item"><a href="#">Tentang</a></li>
-								<li class="nav-item"><a href="#">Lowongan </a></li>
-								<li class="nav-item"><a href="#">Kontak</a></li>
+								<li class="nav-item"><a class="{{ Request::is('tentang') ? 'active' : '' }}" href="/tentang">Tentang</a></li>
+								<li class="nav-item"><a class="{{ Request::is('lowongan*') ? 'active' : '' }}" href="/lowongan">Lowongan </a></li>
+								<li class="nav-item"><a class="{{ Request::is('kontak*') ? 'active' : '' }}" href="/kontak">Kontak</a></li>
 								{{-- <li class="nav-item">
 									<a href="#">
 										Profil
@@ -38,7 +38,9 @@
 							@endguest
 
 							@auth
-									<a href="/profile/myprofile" class="login"><i class="lni lni-user"></i> Profil</a>
+									@can('pelamar')
+										<a href="/profile/myprofile" class="login {{ Request::is('profile*') ? 'active' : 'text-dark' }}"><i class="lni lni-user"></i> Profil</a>
+									@endcan
 							@endauth
 						</div>
 					</nav>

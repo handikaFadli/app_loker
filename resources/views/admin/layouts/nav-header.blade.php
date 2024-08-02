@@ -1,8 +1,7 @@
 <div class="nav-header">
 	<a href="index.html" class="brand-logo">
-		<img class="logo-abbr" src="{{ asset('assets_admin/images/logo.png') }}" alt="" />
-		<img class="logo-compact" src="{{ asset('assets_admin/images/logo-text.png') }}" alt="" />
-		<img class="brand-title" src="{{ asset('assets_admin/images/logo-text.png') }}" alt="" />
+		<img class="logo-abbr" src="{{ asset('assets_admin/images/logo-tab.jpg') }}" alt="" />
+		<span class="ml-2 brand-title">UCIC</span>
 	</a>
 
 	<div class="nav-control">

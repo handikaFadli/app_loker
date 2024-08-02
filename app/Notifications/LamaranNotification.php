@@ -3,10 +3,11 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class LamaranNotification extends Notification
+class LamaranNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -37,15 +38,18 @@ class LamaranNotification extends Notification
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
+    public function toMail($notifiable): MailMessage
     {
 
-        return (new MailMessage)
-            ->subject('Status Lamaran Anda')
-            ->greeting('Halo!')
-            ->line($this->description)
-            ->action('Lihat Detail', url($this->link))
-            ->line('Terima kasih.');
+        $mailMessage = (new MailMessage)
+            ->subject('Universitas Catur Insan Cendekia')
+            ->view('emails.lamaran', [
+                'header' => $this->header,
+                'description' => $this->description,
+                'link' => $this->link,
+            ]);
+
+        return $mailMessage;
     }
 
     /**

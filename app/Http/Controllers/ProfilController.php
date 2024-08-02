@@ -2,21 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Lamaran;
 use App\Models\Pelamar;
-use App\Models\Pendidikan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfilController extends Controller
 {
     public function index()
     {
+        Gate::authorize('view', User::class);
+
         $email = Auth::user()->email;
 
-        $pelamar = Pelamar::where('email', $email)->firstOrFail();
+        $pelamar = Pelamar::where('email', $email)
+            ->with(['pendidikan', 'pekerjaan', 'keterampilan'])
+            ->firstOrFail();
 
         $unreadCount = $this->cekNotifikasi();
 
@@ -32,106 +37,40 @@ class ProfilController extends Controller
 
     public function create()
     {
-        return view(
-            'profile.create'
-        );
+        Gate::authorize('view', User::class);
+
+        $pelamar = Pelamar::where('email', Auth::user()->email)->first();
+
+        if (!is_null($pelamar->nama) && !is_null($pelamar->tempat_lahir) && !is_null($pelamar->tanggal_lahir)) {
+            return redirect('/profile/myprofile');
+        } else {
+            return view(
+                'profile.create'
+            );
+        }
     }
 
-    public function store(Request $request)
+    public function edit()
     {
-        $request->validate(
-            [
-                'nama_depan' => 'required',
-                'nama_belakang' => 'required',
-                'tempat_lahir' => 'required',
-                'tanggal_lahir' => 'required',
-                'tempat_tinggal' => 'required',
-                'jenis_kelamin' => 'required',
-                'status' => 'required',
-                'foto' => 'required',
-                'foto.*' => 'image|mimes:jpeg,png,jpg,svg,webp',
-                'nomor_telepon' => 'required',
-                'email' => 'required',
-                'cv' => 'file|mimes:pdf',
-            ],
-            [
-                'nama_depan.required' => 'Inputan nama depan harus diisi',
-                'nama_belakang.required' => 'Inputan nama belakang harus diisi',
-                'tempat_lahir.required' => 'Inputan tempat lahir harus diisi',
-                'tanggal_lahir.required' => 'Inputan tanggal lahir harus diisi',
-                'tempat_tinggal.required' => 'Inputan tempat tinggal harus diisi',
-                'jenis_kelamin.required' => 'Inputan jenis kelamin harus diisi',
-                'status.required' => 'Inputan status harus diisi',
-                'foto.required' => 'Inputan foto harus diisi',
-                'foto.image' => 'File foto harus berupa gambar dengan format jpeg, png, jpg, svg, atau webp',
-                'foto.mimes' => 'File foto harus berupa gambar dengan format jpeg, png, jpg, svg, atau webp',
-                'nomor_telepon.required' => 'Inputan nomor telepon harus diisi',
-                'email.required' => 'Inputan email harus diisi',
-                'cv.mimes' => 'File CV harus berupa file dengan format PDF',
-            ]
-        );
+        Gate::authorize('view', User::class);
 
-        $input = $request->all();
+        $pelamar = Pelamar::where('email', auth()->user()->email)
+            ->with(['pendidikan', 'pekerjaan', 'keterampilan'])
+            ->first();
 
-        // menggabungkan nama depan dan nama belakang
-        $input['nama'] = $input['nama_depan'] . ' ' . $input['nama_belakang'];
-
-        // Menghitung umur dari tanggal lahir
-        $input['umur'] = Carbon::parse($input['tanggal_lahir'])->age;
-
-        if ($request->hasFile("foto")) {
-            $image = $request->file("foto");
-            $destinationPath = "media/";
-            $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input["foto"] = "$profileImage";
+        if (!$pelamar) {
+            return redirect()->back();
         }
 
-        if ($request->hasFile('cv')) {
-            $cvFile = $request->file('cv');
-            $cvPath = 'media/documents_cv/';
-            $cvFileName = date('YmdHis') . '_cv.' . $cvFile->getClientOriginalExtension();
-            $cvFile->move($cvPath, $cvFileName);
-            $input['cv'] = $cvFileName;
-        }
-
-        // Menyimpan data pelamar
-        $pelamar = Pelamar::where('email', $input['email'])->first();
-
-        if ($pelamar) {
-            $pelamar->update($input);
-        } else {
-            Pelamar::create($input);
-        }
-
-        // Menyimpan data pendidikan
-        if (isset($input['pendidikan'])) {
-            foreach ($input['pendidikan'] as $index => $pendidikan) {
-                if ($request->hasFile("pendidikan.$index.transkip_nilai")) {
-                    $transkipFile = $request->file("pendidikan.$index.transkip_nilai");
-                    $transkipPath = 'media/documents_cv/';
-                    $transkipFileName = date('YmdHis') . "_transkip_$index." . $transkipFile->getClientOriginalExtension();
-                    $transkipFile->move($transkipPath, $transkipFileName);
-                    $pendidikan['transkip_nilai'] = $transkipFileName;
-                }
-                if ($request->hasFile("pendidikan.$index.ijazah")) {
-                    $ijazahFile = $request->file("pendidikan.$index.ijazah");
-                    $ijazahPath = 'media/documents_cv/';
-                    $ijazahFileName = date('YmdHis') . "_ijazah_$index." . $ijazahFile->getClientOriginalExtension();
-                    $ijazahFile->move($ijazahPath, $ijazahFileName);
-                    $pendidikan['ijazah'] = $ijazahFileName;
-                }
-                $pendidikan['pelamar_id'] = $pelamar->id;
-                Pendidikan::create($pendidikan);
-            }
-        }
-
-        Alert::success('Data Profile', 'Berhasil Ditambahkan!');
-        return redirect('/');
+        return view('profile.edit', [
+            'pelamar' => $pelamar,
+        ]);
     }
 
     public function lamaran()
     {
+        Gate::authorize('view', User::class);
+
         $email = Auth::user()->email;
 
         $pelamar = Pelamar::where('email', $email)->firstOrFail();
@@ -141,7 +80,7 @@ class ProfilController extends Controller
         // Ambil lamarans dengan relasi lowongan dan perusahaan
         $lamaran = Lamaran::with(['lowongan.perusahaan'])
             ->where('pelamar_id', $pelamar->id)
-            ->get();
+            ->latest()->get();
 
         return view(
             'profile.kelola-lamaran',
@@ -154,6 +93,8 @@ class ProfilController extends Controller
 
     public function notifikasi()
     {
+        Gate::authorize('view', User::class);
+
         $notifications = Auth::user()->notifications;
         $unreadCount = $this->cekNotifikasi();
 
@@ -169,5 +110,38 @@ class ProfilController extends Controller
         $unreadCount = $user->unreadNotifications->count();
 
         return $unreadCount;
+    }
+
+    public function viewUpdatePassword()
+    {
+        Gate::authorize('view', User::class);
+
+        $unreadCount = $this->cekNotifikasi();
+
+        return view('profile.ubah-password', [
+            'unreadCount' => $unreadCount,
+        ]);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        Gate::authorize('view', User::class);
+
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+        ]);
+
+        $user = User::find(Auth::user()->id);
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            return back()->withErrors(['old_password' => 'Old password does not match.']);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        Alert::success('Password', 'Berhasil Diubah!');
+        return redirect('/profile/myprofile');
     }
 }

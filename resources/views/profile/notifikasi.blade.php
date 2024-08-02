@@ -12,12 +12,19 @@
 			</div>
 			<div class="col-lg-8 col-md-8 align-items-center justify-content-center">
 				<p class="description text-primary mx-2">
-					Lowongan {{ $notification->data['lowongan'] }}
+					Lowongan {{ $notification->data['header'] }}
 				</p>
 				<p class="description mx-2">
-					{{ $notification->data['description'] }}
-					@if (!empty($notification->data['link']))
-							<a href="{{ $notification->data['link'] }}">Link</a>
+					@if (empty($notification->data['notif']))
+						{{ $notification->data['description'] }}
+						@if (!empty($notification->data['link']))
+								<a href="{{ $notification->data['link'] }}">Link</a>
+						@endif
+					@else
+						{{ $notification->data['notif'] }}
+						@if (!empty($notification->data['link']))
+								<a href="{{ $notification->data['link'] }}">Link Gmeet</a>
+						@endif
 					@endif
 				</p>
 			</div>
@@ -31,9 +38,9 @@
 	@empty
 	<div class="manage-content">
 		<div class="row align-items-center justify-content-center">
-			<div class="col-lg-12 col-md-12">
+			<div class="col-lg-12 col-md-12 d-flex justify-content-center text-center">
 				<p class="description">
-					Tidak ada notifikasi!
+					Tidak ada notifikasi.
 				</p>
 			</div>
 		</div>

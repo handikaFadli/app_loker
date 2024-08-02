@@ -7,13 +7,12 @@
 				<div class="row">
 						<div class="col-12">
 								<div class="breadcrumbs-content">
-										<h1 class="page-title">Manage Resumes</h1>
-										<p>Business plan draws on a wide range of knowledge from different business<br> disciplines.
-												Business draws on a wide range of different business .</p>
+										<h1 class="page-title">Kelola Akun</h1>
+										<p>Kelola akun Anda dengan mudah. Di halaman ini, Anda dapat memperbarui<br>informasi pribadi, mengubah kata sandi,dan mengatur preferensi akun lainnya<br>untuk memastikan data Anda selalu akurat dan up-to-date.</p>
 								</div>
 								<ul class="breadcrumb-nav">
-										<li><a href="index.html">Home</a></li>
-										<li>Manage Resumes</li>
+										<li><a href="/">Home</a></li>
+										<li>Kelola Akun</li>
 								</ul>
 						</div>
 				</div>
@@ -30,18 +29,19 @@
 					<div class="col-lg-4 col-12">
 						<div class="dashbord-sidebar">
 							<ul>
-								<li class="heading">Kelola Profil</li>
+								<li class="heading">Kelola Akun</li>
 								<li>
-									<a href="/profile/myprofile" class="{{ Request::is('profile/myprofile*') ? 'active' : '' }}"><i class="lni lni-clipboard"></i> Profil</a>
+									<a href="/profile/myprofile" class="{{ Request::is('profile/myprofile*') ? 'active' : '' }}"><i class="lni lni-user"></i> Profil Saya</a>
 								</li>
 								<li>
-									<a href="/profile/notifikasi" class="{{ Request::is('profile/notifikasi*') ? 'active' : '' }}"><i class="lni lni-alarm"></i> Notifikasi <span class="notifi">{{ $unreadCount ? $unreadCount : '0'  }}</span></a>
+									<a href="/profile/notifikasi" class="{{ Request::is('profile/notifikasi*') ? 'active' : '' }}"><i class="lni lni-alarm"></i> Notifikasi @if($unreadCount) <span class="notifi">{{ $unreadCount }}</span> @endif
+									</a>
 								</li>
 								<li>
-									<a href="/profile/lamaran" class="{{ Request::is('profile/lamaran*') ? 'active' : '' }}"><i class="lni lni-envelope"></i> Kelola Lamaran</a>
+									<a href="/profile/lamaran" class="{{ Request::is('profile/lamaran*') ? 'active' : '' }}"><i class="lni lni-envelope"></i> Lamaran</a>
 								</li>
 								<li>
-									<a href="change-password.html"><i class="lni lni-lock"></i> Ubah Password</a>
+									<a href="/profile/ubah-password" class="{{ Request::is('profile/ubah-password*') ? 'active' : '' }}"><i class="lni lni-lock"></i> Ubah Password</a>
 								</li>
 								<li>
 									<a>

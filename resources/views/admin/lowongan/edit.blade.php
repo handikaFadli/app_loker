@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('title')
-		Admin App Loker - {{ $title }}
+Portal Lowongan Kerja - {{ $title }}
 @endsection
 
 @section('style')
@@ -48,7 +48,6 @@
 															<th>#</th>
 															<th>Perusahaan</th>
 															<th>Lokasi</th>
-															<th>Deskripsi</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -58,7 +57,6 @@
 															</td>
 															<td>{{ $perusahaan->nama }}</td>
 															<td>{{ $perusahaan->lokasi }}</td>
-															<td>{{ $perusahaan->deskripsi }}</td>
 														</tr>
 													</tbody>
 												</table>
@@ -81,6 +79,18 @@
 											<span class="text-danger">*</span>
 											<input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug', $lowongan->slug) }}" readonly>
 											@error('slug')
+												<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
+													*{{ $message }}
+												</div>
+											@enderror
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-12">
+											<label for="informasi">Informasi Lowongan</label>
+											<span class="text-danger">*</span>
+											<input type="text" class="form-control" id="informasi" name="informasi" value="{{ old('informasi', $lowongan->informasi) }}">
+											@error('informasi')
 												<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
 													*{{ $message }}
 												</div>
@@ -117,9 +127,9 @@
 												<select id="inlineFormCustomSelect" name="tipe" class="form-control custom-select">
 													<option value="0" hidden disabled selected>Pilih</option>
 													@if (old('tipe', $lowongan->tipe) == $lowongan->tipe)
-													<option value="{{ $lowongan->tipe }}" hidden selected>{{ $lowongan->tipe }}</option>
+													<option value="{{ $lowongan->tipe }}" hidden selected>{{ ucwords($lowongan->tipe) }}</option>
 													@else
-													<option value="{{ $lowongan->tipe }}" hidden selected>{{ $lowongan->tipe }}</option>
+													<option value="{{ $lowongan->tipe }}" hidden selected>{{ ucwords($lowongan->tipe) }}</option>
 													@endif
 													<option value="full time">Full Time</option>
 													<option value="part time">Part Time</option>
@@ -133,27 +143,27 @@
 												@enderror
 											</div>
 											<div class="form-row">
-												{{-- <div class="form-group col-md-8">
-													<label for="batas_waktu">Batas Waktu</label>
+												<div class="form-group col-md-6">
+													<label for="batas_akhir">Batas Akhir Pendaftaran</label>
 													<span class="text-danger">*</span>
-													<input type="text" class="form-control" name="batas_waktu" id="mdate" value="{{ old('batas_waktu', $lowongan->batas_waktu) }}">
-													@error('batas_waktu')
+													<input type="date" class="form-control" name="batas_akhir" value="{{ old('batas_akhir', $lowongan->batas_akhir) }}">
+													@error('batas_akhir')
 														<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
 															*{{ $message }}
 														</div>
 													@enderror
-												</div> --}}
-												<div class="form-group col-md-12">
+												</div>
+												<div class="form-group col-md-6">
 													<label for="status">Status</label>
 													<span class="text-danger">*</span>
 													<select id="inlineFormCustomSelect" name="status" class="form-control custom-select">
 														@if (old('status', $lowongan->status) == $lowongan->status)
-														<option value="{{ $lowongan->status }}" hidden selected>{{ $lowongan->status }}</option>
+														<option value="{{ $lowongan->status }}" hidden selected>{{ ucwords($lowongan->status) }}</option>
 														@else
-														<option value="{{ $lowongan->status }}" hidden selected>{{ $lowongan->status }}</option>
+														<option value="{{ $lowongan->status }}" hidden selected>{{ ucwords($lowongan->status) }}</option>
 														@endif
-														<option value="open">open</option>
-														<option value="close">close</option>
+														<option value="open">Open</option>
+														<option value="close">Close</option>
 													</select>
 													@error('status')
 														<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
@@ -164,7 +174,7 @@
 											</div>
 										</div>
 										<div class="form-group col-md-6">
-											<label for="gambar">Gambar</label>
+											<label for="gambar">Poster</label>
 											<span class="text-danger">*</span>
 											<input type="file" id="gambar" class="form-control" name="gambar" accept="image/*" value="{{ $lowongan->gambar }}" style="display: none;" onchange="previewAndHideOverlay(event)">
 											@error('gambar')
@@ -173,17 +183,17 @@
 												</div>
 											@enderror
 											<div class="img-output mt-1 mx-2" onclick="triggerFileInput()">
-												<img src="{{ asset('media/'.$lowongan->gambar) }}" id="output" width="110">
+												<img src="{{ $lowongan->gambar }}" id="output" width="110">
 											</div>
 										</div>
 									</div>
 									<div class="form-row">
 											<div class="form-group col-md-12">
-												<label for="informasi">Informasi Lainnya</label>
+												<label for="persyaratan">Informasi Persyaratan</label>
 												<span class="text-danger">*</span>
-												<input id="informasi" type="hidden" name="informasi" value="{{ old('informasi', $lowongan->informasi) }}">
-												<trix-editor input="informasi"></trix-editor>
-												@error('informasi')
+												<input id="persyaratan" type="hidden" name="persyaratan" value="{{ old('persyaratan', $lowongan->persyaratan) }}">
+												<trix-editor input="persyaratan"></trix-editor>
+												@error('persyaratan')
 													<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
 														*{{ $message }}
 													</div>
@@ -211,8 +221,6 @@
 
 	<!-- Input type Date -->
 	<script src="{{ asset('assets_admin/vendor/moment/moment.min.js') }}"></script>
-	<script src="{{ asset('assets_admin/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
-	<script src="{{ asset('assets_admin/js/plugins-init/material-date-picker-init.js') }}"></script>
 	
 	<!-- Input Post Slug -->
 	<script>

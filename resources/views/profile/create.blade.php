@@ -7,15 +7,13 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="breadcrumbs-content">
-					<h1 class="page-title">Add Resume</h1>
-					<p>
-						Business plan draws on a wide range of knowledge from different business<br />
-						disciplines. Business draws on a wide range of different business .
-					</p>
+					<h1 class="page-title">Edit Profil</h1>
+					<p>Perbarui informasi pribadi Anda di halaman ini. Pastikan semua data yang Anda masukkan<br>akurat dan terbaru untuk memaksimalkan pengalaman Anda di platform kami.</p>
 				</div>
 				<ul class="breadcrumb-nav">
-					<li><a href="index.html">Home</a></li>
-					<li>Add Resume</li>
+					<li><a href="/">Home</a></li>
+					<li><a href="/profile/myprofile">Profil</a></li>
+					<li>Edit Profil</li>
 				</ul>
 			</div>
 		</div>
@@ -36,22 +34,11 @@
 					<form class="form-ad" action="{{ route("profile-create") }}" method="POST" enctype="multipart/form-data">
 						@csrf
 						<div class="row">
-							<div class="col-lg-6 col-12">
+							<div class="col-lg-12 col-12">
 								<div class="form-group">
-									<label class="control-label" for="nama_depan">Nama Depan <span class="text-danger">*</span></label>
-									<input type="text" class="form-control" id="nama_depan" name="nama_depan" value="{{ old('nama_depan') }}" />
-									@error('nama_depan')
-										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
-											*{{ $message }}
-										</div>
-									@enderror
-								</div>
-							</div>
-							<div class="col-lg-6 col-12">
-								<div class="form-group">
-									<label class="control-label" for="nama_belakang">Nama Belakang <span class="text-danger">*</span></label>
-									<input type="text" class="form-control" id="nama_belakang" name="nama_belakang" value="{{ old('nama_belakang') }}" />
-									@error('nama_belakang')
+									<label class="control-label" for="nama">Nama Lengkap <span class="text-danger">*</span></label>
+									<input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Nama Lengkap" />
+									@error('nama')
 										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
 											*{{ $message }}
 										</div>
@@ -61,7 +48,7 @@
 							<div class="col-lg-6 col-12">
 								<div class="form-group">
 									<label class="control-label" for="tempat_lahir">Tempat Lahir <span class="text-danger">*</span></label>
-									<input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}" />
+									<input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}" placeholder="Tempat Lahir" />
 									@error('tempat_lahir')
 										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
 											*{{ $message }}
@@ -83,7 +70,7 @@
 							<div class="col-12">
 								<div class="form-group">
 									<label class="control-label" for="tempat_tinggal">Tempat Tinggal <span class="text-danger">*</span></label>
-									<input type="text" class="form-control" id="tempat_tinggal" name="tempat_tinggal" value="{{ old('tempat_tinggal') }}" />
+									<input type="text" class="form-control" id="tempat_tinggal" name="tempat_tinggal" value="{{ old('tempat_tinggal') }}" placeholder="Tempat Tinggal" />
 									@error('tempat_tinggal')
 										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
 											*{{ $message }}
@@ -115,7 +102,7 @@
 							<div class="col-lg-6 col-12">
 								<div class="form-group">
 									<label class="control-label" for="status">Status <span class="text-danger">*</span></label>
-									<input type="text" class="form-control" id="status" name="status" value="{{ old('status') }}" />
+									<input type="text" class="form-control" id="status" name="status" value="{{ old('status') }}" placeholder="cth Menikah" />
 									@error('status')
 										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
 											*{{ $message }}
@@ -146,7 +133,7 @@
 							<div class="col-lg-6 col-12">
 								<div class="form-group">
 									<label class="control-label" for="nomor_telepon">Nomor Telepon <span class="text-danger">*</span></label>
-									<input type="number" class="form-control" id="nomor_telepon" name="nomor_telepon" value="{{ old('nomor_telepon') }}" />
+									<input type="text" inputmode="numeric" class="form-control" id="nomor_telepon" name="nomor_telepon" value="{{ old('nomor_telepon') }}" placeholder="cth 0888888888" />
 									@error('nomor_telepon')
 										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
 											*{{ $message }}
@@ -167,8 +154,8 @@
 							</div>
 							<div class="col-lg-6 col-12">
 								<div class="form-group">
-									<label class="control-label" for="instagram">Instagram</label>
-									<input type="text" class="form-control" id="instagram" name="instagram" value="{{ old('instagram') }}" />
+									<label class="control-label" for="instagram">Instagram (Link)</label>
+									<input type="text" class="form-control" id="instagram" name="instagram" value="{{ old('instagram') }}" placeholder="cth https://instagram.com/[username]" />
 									@error('instagram')
 										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
 											*{{ $message }}
@@ -178,8 +165,8 @@
 							</div>
 							<div class="col-lg-6 col-12">
 								<div class="form-group">
-									<label class="control-label" for="linkedin">Linkedin</label>
-									<input type="text" class="form-control" id="linkedin" name="linkedin" value="{{ old('linkedin') }}" />
+									<label class="control-label" for="linkedin">Linkedin {Link}</label>
+									<input type="text" class="form-control" id="linkedin" name="linkedin" value="{{ old('linkedin') }}" placeholder="cth https://linkedin.com/[username]" />
 									@error('linkedin')
 										<div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
 											*{{ $message }}
@@ -188,7 +175,7 @@
 								</div>
 							</div>
 						</div>
-						<h3 class="single-section-title">Informasi Pendidikan</h3>
+						<h3 class="single-section-title">Riwayat Pendidikan</h3>
 						<div class="form-pendidikan-wrapper" id="form-pendidikan-wrapper">
 							<div class="form-pendidikan">
 								<div class="row align-items-center justify-content-center">
@@ -208,14 +195,14 @@
 								<div class="row">
 									<div class="col-lg-6 col-12">
 										<div class="form-group">
-											<label class="control-label" for="nama_universitas">Nama Universitas <span class="text-danger">*</span></label>
-											<input type="text" class="form-control" id="nama_universitas" name="pendidikan[0][nama_universitas]" required />
+											<label class="control-label" for="perguruan_tinggi">Perguruan Tinggi <span class="text-danger">*</span></label>
+											<input type="text" class="form-control" id="perguruan_tinggi" name="pendidikan[0][perguruan_tinggi]" required placeholder="cth Universitas Indonesia" />
 										</div>
 									</div>
 									<div class="col-lg-6 col-12">
 										<div class="form-group">
 											<label class="control-label" for="bidang_studi">Bidang Studi <span class="text-danger">*</span></label>
-											<input type="text" class="form-control" id="bidang_studi" name="pendidikan[0][bidang_studi]" required />
+											<input type="text" class="form-control" id="bidang_studi" name="pendidikan[0][bidang_studi]" required placeholder="cth Teknik Informatika" />
 										</div>
 									</div>
 								</div>
@@ -223,13 +210,27 @@
 									<div class="col-md-6 col-6">
 										<div class="form-group">
 											<label class="control-label" for="gelar">Gelar <span class="text-danger">*</span></label>
-											<input type="text" class="form-control" id="gelar" name="pendidikan[0][gelar]" required />
+											<input type="text" class="form-control" id="gelar" name="pendidikan[0][gelar]" required placeholder="cth S.KOM" />
 										</div>
 									</div>
 									<div class="col-md-6 col-6">
 										<div class="form-group">
 											<label class="control-label" for="ipk">IPK <span class="text-danger">*</span></label>
-											<input type="text" class="form-control" id="ipk" name="pendidikan[0][ipk]" required />
+											<input type="text" class="form-control" id="ipk" name="pendidikan[0][ipk]" required placeholder="cth 3.80" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-6">
+										<div class="form-group">
+											<label class="control-label" for="mulai">Dari <span class="text-danger">*</span></label>
+											<input type="text" inputmode="numeric" class="form-control" id="mulai" name="pendidikan[0][mulai]" required placeholder="cth 2019" />
+										</div>
+									</div>
+									<div class="col-md-6 col-6">
+										<div class="form-group">
+											<label class="control-label" for="selesai">Ke <span class="text-danger">*</span></label>
+											<input type="text" inputmode="numeric" class="form-control" id="selesai" name="pendidikan[0][selesai]" required placeholder="cth 2023" />
 										</div>
 									</div>
 								</div>
@@ -248,6 +249,7 @@
 													</div>
 												</div>
 											</div>
+											<span class="mx-1 mt-1 text-muted">File yang diunggah harus .pdf</span>
 										</div>
 									</div>
 									<div class="col-md-6 col-12">
@@ -264,12 +266,13 @@
 													</div>
 												</div>
 											</div>
+											<span class="mx-1 mt-1 text-muted">File yang diunggah harus .pdf</span>
 										</div>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label" for="deskripsi">Deskripsi</label>
-									<textarea class="form-control" rows="6" id="deskripsi" name="deskripsi">{{ old('deskripsi') }}</textarea>
+									<textarea class="form-control" rows="6" id="deskripsi" name="pendidikan[0][deskripsi]"></textarea>
 								</div>
 							</div>
 						</div>
@@ -277,14 +280,159 @@
 							<div class="col-lg-12 col-md-12 col-12">
 								<div class="add-post-btn float-right">
 										<ul>
-												<li><a href="#" class="btn-added"><i class="lni lni-add-files"></i> Add New
-																Education</a></li>
+												<li>
+													<a href="#" class="btn-added"><i class="lni lni-add-files"></i> Add New Education</a>
+												</li>
+										</ul>
+								</div>
+							</div>
+						</div>
+						<h3 class="single-section-title">Riwayat Pekerjaan</h3>
+						<div class="form-pekerjaan-wrapper" id="form-pekerjaan-wrapper">
+							<div class="form-pekerjaan">
+								<div class="row align-items-center justify-content-center">
+									<div class="col-lg-12 col-md-12 col-12">
+										<div class="add-post-btn float-right">
+												<ul>
+														<li>
+															<a href="#" class="btn-delete-job">
+																<i class="lni lni-remove-file"></i>
+																	Delete This
+															</a>
+														</li>
+												</ul>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6 col-12">
+										<div class="form-group">
+											<label class="control-label" for="nama_perusahaan">Nama Perusahaan</label>
+											<input type="text" class="form-control" id="nama_perusahaan" name="pekerjaan[0][nama_perusahaan]" placeholder="cth Pt. Indonesia Maju" />
+										</div>
+									</div>
+									<div class="col-lg-6 col-12">
+										<div class="form-group">
+											<label class="control-label" for="jabatan">Jabatan</label>
+											<input type="text" class="form-control" id="jabatan" name="pekerjaan[0][jabatan]" placeholder="cth Direktur" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-6">
+										<div class="form-group">
+											<label class="control-label" for="mulai">Dari</label>
+											<input type="text" inputmode="numeric" class="form-control" id="mulai" name="pekerjaan[0][mulai]" placeholder="cth 2019" />
+										</div>
+									</div>
+									<div class="col-md-6 col-6">
+										<div class="form-group">
+											<label class="control-label" for="selesai">Ke</label>
+											<input type="text" inputmode="numeric" class="form-control" id="selesai" name="pekerjaan[0][selesai]" required placeholder="cth 2023" />
+										</div>
+									</div>
+								</div>
+								<div class="row mb-1">
+									<div class="col-md-12 col-12">
+										<div class="form-group">
+											<label for="surat_keterangan">Surat Keterangan</label>
+											<div class="button-group col-md-4 col-12 mt-2">
+												<div class="action-buttons">
+													<div class="upload-button button">
+														<a href="javacript:" class="btn pointer-event">
+															<i class="lni lni-upload mx-1"></i>
+															Upload
+														</a>
+														<input type="file" name="pekerjaan[0][surat_keterangan]" accept="application/pdf" />
+													</div>
+												</div>
+											</div>
+											<span class="mx-1 mt-1 text-muted">File yang diunggah harus .pdf</span>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="deskripsi">Deskripsi</label>
+									<textarea class="form-control" rows="6" id="deskripsi" name="pekerjaan[0][deskripsi]"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="row align-items-center justify-content-center">
+							<div class="col-lg-12 col-md-12 col-12">
+								<div class="add-post-btn float-right">
+										<ul>
+												<li>
+													<a href="#" class="btn-added-job"><i class="lni lni-add-files"></i> Add New Job</a>
+												</li>
+										</ul>
+								</div>
+							</div>
+						</div>
+						<h3 class="single-section-title">Keterampilan</h3>
+						<div class="form-keterampilan-wrapper" id="form-keterampilan-wrapper">
+							<div class="form-keterampilan">
+								<div class="row align-items-center justify-content-center">
+									<div class="col-lg-12 col-md-12 col-12">
+										<div class="add-post-btn float-right">
+												<ul>
+														<li>
+															<a href="#" class="btn-delete-skill">
+																<i class="lni lni-remove-file"></i>
+																	Delete This
+															</a>
+														</li>
+												</ul>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6 col-12">
+										<div class="form-group">
+											<label class="control-label" for="nama">Keterampilan</label>
+											<input type="text" class="form-control" id="nama" name="keterampilan[0][nama]" placeholder="Keterampilan" />
+										</div>
+									</div>
+									<div class="col-lg-6 col-12">
+										<div class="form-group">
+											<label class="control-label" for="penguasaan">(1 - 5)</label>
+											<input type="text" inputmode="numeric" class="form-control" id="penguasaan" name="keterampilan[0][penguasaan]" placeholder="Penguasaan, cth 4" min="1" max="5" />
+										</div>
+									</div>
+								</div>
+								<div class="row mb-1">
+									<div class="col-md-12 col-12">
+										<div class="form-group">
+											<label for="sertifikat">Sertifikat</label>
+											<div class="button-group col-md-4 col-12 mt-2">
+												<div class="action-buttons">
+													<div class="upload-button button">
+														<a href="javacript:" class="btn pointer-event">
+															<i class="lni lni-upload mx-1"></i>
+															Upload
+														</a>
+														<input type="file" name="keterampilan[0][sertifikat]" accept="application/pdf" />
+													</div>
+												</div>
+											</div>
+											<span class="mx-1 mt-1 text-muted">File yang diunggah harus .pdf</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row align-items-center justify-content-center">
+							<div class="col-lg-12 col-md-12 col-12">
+								<div class="add-post-btn float-right">
+										<ul>
+												<li>
+													<a href="#" class="btn-added-skill"><i class="lni lni-add-files"></i> Add New Skill</a>
+												</li>
 										</ul>
 								</div>
 							</div>
 						</div>
 						<div class="form-group col-md-6 col-12 mt-3 mb-5">
-							<label for="cv">Dokumen CV <span class="text-danger">*</span></label>
+							<label for="cv">CV (Termasuk Portfolio)<span class="text-danger">*</span></label>
 							<div class="button-group col-md-6 col-12 mt-2">
 								<div class="action-buttons">
 									<div class="upload-button button">
@@ -301,6 +449,7 @@
 									</div>
 								</div>
 							</div>
+							<span class="mx-1 mt-1 text-muted">File yang diunggah harus .pdf</span>
 						</div>
 						<div class="row mt-5">
 							<div class="col-12 align-items-center justify-content-end d-flex">
@@ -379,6 +528,72 @@
 						button.addEventListener('click', function (e) {
 								e.preventDefault();
 								this.closest('.form-pendidikan').remove();
+						});
+				});
+		});
+	</script>
+
+	<!-- Form pekerjaan -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+				let pekerjaanIndex = 1;
+
+				document.querySelector('.btn-added-job').addEventListener('click', function (e) {
+						e.preventDefault();
+						let formPekerjaan = document.querySelector('.form-pekerjaan').cloneNode(true);
+						formPekerjaan.querySelectorAll('input, textarea').forEach((input) => {
+								let name = input.name;
+								name = name.replace(/\d+/, pekerjaanIndex);
+								input.name = name;
+								input.value = '';
+						});
+						formPekerjaan.querySelectorAll('.btn-delete-job').forEach((button) => {
+								button.addEventListener('click', function (e) {
+										e.preventDefault();
+										this.closest('.form-pekerjaan').remove();
+								});
+						});
+						document.querySelector('#form-pekerjaan-wrapper').appendChild(formPekerjaan);
+						pekerjaanIndex++;
+				});
+
+				document.querySelectorAll('.btn-delete-job').forEach((button) => {
+						button.addEventListener('click', function (e) {
+								e.preventDefault();
+								this.closest('.form-pekerjaan').remove();
+						});
+				});
+		});
+	</script>
+
+	<!-- Form Keterampilan -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+				let keterampilanIndex = 1;
+
+				document.querySelector('.btn-added-skill').addEventListener('click', function (e) {
+						e.preventDefault();
+						let formKeterampilan = document.querySelector('.form-keterampilan').cloneNode(true);
+						formKeterampilan.querySelectorAll('input').forEach((input) => {
+								let name = input.name;
+								name = name.replace(/\d+/, keterampilanIndex);
+								input.name = name;
+								input.value = '';
+						});
+						formKeterampilan.querySelectorAll('.btn-delete-skill').forEach((button) => {
+								button.addEventListener('click', function (e) {
+										e.preventDefault();
+										this.closest('.form-keterampilan').remove();
+								});
+						});
+						document.querySelector('#form-keterampilan-wrapper').appendChild(formKeterampilan);
+						keterampilanIndex++;
+				});
+
+				document.querySelectorAll('.btn-delete-skill').forEach((button) => {
+						button.addEventListener('click', function (e) {
+								e.preventDefault();
+								this.closest('.form-keterampilan').remove();
 						});
 				});
 		});

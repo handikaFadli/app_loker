@@ -8,7 +8,7 @@
     <meta name="keywords" content="Lowongan Kerja" />
     <title>@yield('title')</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets_admin/images/favicon.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets_admin/images/logo-tab.jpg') }}" />
 
     <!-- Vendor -->
     <link rel="stylesheet" href="{{ asset('assets_admin/vendor/owl-carousel/css/owl.carousel.min.css') }}" />
@@ -149,6 +149,10 @@
     <script src="{{ asset("assets_admin/js/plugins-init/jquery.validate-init.js") }}"></script>
     <!-- Form step init -->
     <script src="{{ asset("assets_admin/js/plugins-init/jquery-steps-init.js") }}"></script>
+
+    <!-- Chart ChartJS plugin files -->
+    <script src="{{ asset("assets_admin/vendor/chart.js/Chart.bundle.min.js") }}"></script>
+    <script src="{{ asset("assets_admin/js/plugins-init/chartjs-init.js") }}"></script>
     
 		@yield('script')
   </body>

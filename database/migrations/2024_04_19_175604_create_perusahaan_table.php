@@ -14,12 +14,17 @@ return new class extends Migration
         Schema::create('perusahaan', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 255);
+            $table->text('visi');
+            $table->text('misi');
+            $table->text('tujuan');
             $table->string('lokasi', 255);
             $table->text('deskripsi')->nullable();
+            $table->string('telepon', 255)->nullable();
+            $table->string('email', 255)->nullable();
             $table->string('website', 255)->nullable();
             $table->string('linkedin', 255)->nullable();
             $table->string('instagram', 255)->nullable();
-            $table->string('logo', 255);
+            $table->text('logo')->nullable();
             $table->timestamps();
         });
     }

@@ -56,17 +56,14 @@
 							<i class="mdi mdi-account"></i>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a href="./app-profile.html" class="dropdown-item">
-								<i class="icon-user"></i>
-								<span class="ml-2">Profile </span>
-							</a>
-							<a href="./email-inbox.html" class="dropdown-item">
-								<i class="icon icon-settings-gear-64"></i>
-								<span class="ml-2">Settings </span>
-							</a>
-							<a href="./page-login.html" class="dropdown-item">
-								<i class="icon-key"></i>
-								<span class="ml-2">Logout </span>
+							<a class="dropdown-item">
+								<form action="{{ route('logout') }}" method="POST">
+									@csrf
+										<button type="submit" style="border: none; background-color: transparent;">
+											<i class="icon-key"></i>
+											<span class="ml-2">Logout </span>
+										</button>
+								</form>
 							</a>
 						</div>
 					</li>

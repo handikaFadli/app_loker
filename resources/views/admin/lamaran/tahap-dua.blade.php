@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('title')
-		Admin App Loker - {{ $title }}
+Portal Lowongan Kerja - {{ $title }}
 @endsection
 
 @section('content-admin')
@@ -37,7 +37,9 @@
 																	<th>Pelamar</th>
 																	<th>Lowongan</th>
 																	<th>Status</th>
+																	@can('admin')
 																	<th>Action</th>
+																	@endcan
 															</tr>
 													</thead>
 													<tbody>
@@ -45,23 +47,22 @@
 														<tr>
 															<td>{{ $loop->iteration }} </td>
 															<td class="text-center">
-																<a href="{{ route("lamaran.show", $dt->id) }}" data-toggle="tooltip" data-placement="top" title="Detail">
-																	<i class="fa fa-info-circle color-muted"></i> Check
+																<a href="/admin/lamaran/detail/{{ $dt->id }}" data-toggle="tooltip" data-placement="top" title="Detail">
+																	<i class="fa fa-info-circle color-muted"></i> Periksa
 																</a>
 															</td>
 															<td>{{ $dt->pelamar->nama }}</td>
 															<td>{{ $dt->lowongan->judul }}</td>
-															<td>{{ $dt->status_lamaran }}</td>
+															<td>{{ ucwords($dt->status_lamaran) }}</td>
+															@can('admin')
 															<td>
 																<span class="justify-content-center">
-																	<a href="javascript:void()" class="btn btn-rounded btn-outline-success btn-md mx-1" data-toggle="modal" data-target="#update-{{ $dt->id }}">
-																		<span style="font-size: 15px">&check;</span>
-																	</a>
-																	<a href="javascript:void()" class="btn btn-rounded btn-outline-danger btn-md mx-1" data-toggle="modal" data-target="#tolak-{{ $dt->id }}">
-																		<span style="font-size: 15px">X</span>
+																	<a href="javascript:void()" data-toggle="modal" data-target="#edit-{{ $dt->id }}">
+																		<i class="fa fa-pencil color-muted"></i>
 																	</a>
 																</span>
 															</td>
+															@endcan
 														</tr>
 														@endforeach
 													</tbody>

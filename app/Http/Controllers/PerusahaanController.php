@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Perusahaan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PerusahaanController extends Controller
@@ -14,15 +15,21 @@ class PerusahaanController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Perusahaan::class);
+
         $title_alert = 'Hapus Data Perusahaan';
         $text_alert = "Apakah anda yakin menghapus data ini?";
         confirmDelete($title_alert, $text_alert);
+
+        $perusahaan = Perusahaan::first();
+        $perusahaan->misi = json_decode($perusahaan->misi, true) ?? [];
+        $perusahaan->tujuan = json_decode($perusahaan->tujuan, true) ?? [];
 
         return view(
             'admin.perusahaan.index',
             [
                 'title' => 'Perusahaan',
-                'data' => Perusahaan::all(),
+                'data' => $perusahaan,
             ]
         );
     }
@@ -32,12 +39,20 @@ class PerusahaanController extends Controller
      */
     public function create()
     {
-        return view(
-            'admin.perusahaan.create',
-            [
-                'title' => 'Perusahaan',
-            ]
-        );
+        Gate::authorize('viewAny', Perusahaan::class);
+
+        $data = Perusahaan::all();
+
+        if (!isset($data)) {
+            return view(
+                'admin.perusahaan.create',
+                [
+                    'title' => 'Perusahaan',
+                ]
+            );
+        } else {
+            return back();
+        }
     }
 
     /**
@@ -45,6 +60,14 @@ class PerusahaanController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Perusahaan::class);
+
+        $data = Perusahaan::all();
+
+        if (isset($data)) {
+            return back();
+        }
+
         $request->validate(
             [
                 'nama' => 'required',
@@ -62,12 +85,14 @@ class PerusahaanController extends Controller
 
         $input = $request->all();
 
+        $input['misi'] = json_encode($request->input('misi', []));
+        $input['tujuan'] = json_encode($request->input('tujuan', []));
+
         if ($request->hasFile("logo")) {
-            $image = $request->file("logo");
-            $destinationPath = "media/";
-            $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input["logo"] = "$profileImage";
+            $image = $request->file('logo');
+            $path = $image->storeAs('public/perusahaan', date('YmdHis') . '.' . $image->getClientOriginalExtension());
+            $link = Storage::url($path);
+            $input['logo'] = $link;
         }
 
         Perusahaan::create($input);
@@ -89,6 +114,11 @@ class PerusahaanController extends Controller
      */
     public function edit(Perusahaan $perusahaan)
     {
+        Gate::authorize('update', $perusahaan);
+
+        $perusahaan->misi = json_decode($perusahaan->misi, true) ?? [];
+        $perusahaan->tujuan = json_decode($perusahaan->tujuan, true) ?? [];
+
         return view(
             'admin.perusahaan.edit',
             [
@@ -103,6 +133,8 @@ class PerusahaanController extends Controller
      */
     public function update(Request $request, Perusahaan $perusahaan)
     {
+        Gate::authorize('update', $perusahaan);
+
         $request->validate(
             [
                 'nama' => 'required',
@@ -118,16 +150,18 @@ class PerusahaanController extends Controller
 
         $input = $request->all();
 
-        if ($request->hasFile("logo")) {
-            File::delete('media/' . $perusahaan->logo);
+        $input['misi'] = json_encode($request->input('misi', []));
+        $input['tujuan'] = json_encode($request->input('tujuan', []));
 
-            $image = $request->file("logo");
-            $destinationPath = "media/";
-            $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input["logo"] = "$profileImage";
-        } else {
-            unset($input["logo"]);
+        if ($request->hasFile("logo")) {
+            if ($perusahaan->logo) {
+                Storage::delete('public/perusahaan/' . basename($perusahaan->logo));
+            }
+
+            $image = $request->file('logo');
+            $path = $image->storeAs('public/perusahaan', date('YmdHis') . '.' . $image->getClientOriginalExtension());
+            $link = Storage::url($path);
+            $input['logo'] = $link;
         }
 
         $perusahaan->update($input);
@@ -139,13 +173,13 @@ class PerusahaanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Perusahaan $perusahaan)
-    {
-        File::delete('media/' . $perusahaan->logo);
+    // public function destroy(Perusahaan $perusahaan)
+    // {
+    //     Storage::delete('public/perusahaan/' . basename($perusahaan->logo));
 
-        $perusahaan->delete();
+    //     $perusahaan->delete();
 
-        Alert::success('Data Perusahaan', 'Berhasil Dihapus!');
-        return redirect('/admin/perusahaan');
-    }
+    //     Alert::success('Data Perusahaan', 'Berhasil Dihapus!');
+    //     return redirect('/admin/perusahaan');
+    // }
 }
