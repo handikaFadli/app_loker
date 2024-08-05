@@ -38,7 +38,7 @@ Portal Lowongan Kerja - {{ $title }}
 																	<th>Lowongan</th>
 																	<th>Status</th>
 																	@can('admin')
-																	<th>Action</th>
+																	<th>Aksi</th>
 																	@endcan
 															</tr>
 													</thead>
@@ -47,7 +47,7 @@ Portal Lowongan Kerja - {{ $title }}
 														<tr>
 															<td>{{ $loop->iteration }} </td>
 															<td class="text-center">
-																<a href="/admin/lamaran/detail/{{ $dt->id }}" data-toggle="tooltip" data-placement="top" title="Detail">
+																<a href="/admin/lamaran/periksa/{{ $dt->id }}" data-toggle="tooltip" data-placement="top" title="Periksa">
 																	<i class="fa fa-info-circle color-muted"></i> Periksa
 																</a>
 															</td>

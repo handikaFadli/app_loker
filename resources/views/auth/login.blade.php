@@ -26,11 +26,11 @@
                                         @csrf
                                         <div class="form-group">
                                             <label><strong>Email</strong></label>
-                                            <input type="email" name="email" class="form-control" value="admin@gmail.com">
+                                            <input type="email" name="email" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Password</strong></label>
-                                            <input type="password" name="password" class="form-control" value="Password">
+                                            <input type="password" name="password" class="form-control">
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-outline-dark btn-block">Sign me in</button>

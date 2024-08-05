@@ -194,6 +194,20 @@ class LowonganController extends Controller
         return redirect('/admin/lowongan');
     }
 
+    public function updateStatus(Request $request, $id)
+    {
+        $lowongan = Lowongan::findOrFail($id);
+
+        Gate::authorize('update', $lowongan);
+
+        $lowongan->update([
+            'status' => $request->status,
+        ]);
+
+        Alert::success('Status Lowongan', 'Berhasil Diubah!');
+        return redirect('/admin/lowongan');
+    }
+
     /**
      * Remove the specified resource from storage.
      */

@@ -10,16 +10,17 @@ Portal Lowongan Kerja - {{ $title }}
 		<div class="col-sm-6 p-md-0">
 			<div class="welcome-text">
 				<h4>Lamaran Pekerjaan</h4>
-				<p class="mb-0">Detail Lamaran Pekerjaan</p>
+				<p class="mb-0">Periksa Lamaran Pekerjaan</p>
 			</div>
 		</div>
 		<div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-				<li class="breadcrumb-item active"><a href="javascript:void(0)">Lamaran Pekerjaan</a></li>
+				<li class="breadcrumb-item"><a href="/admin/lamaran/riwayat">Lamaran Pekerjaan</a></li>
+				<li class="breadcrumb-item active"><a href="javascript:void(0)">Periksa Lamaran</a></li>
 			</ol>
 		</div>
 	</div>
+	<!-- row -->
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card">
@@ -346,7 +347,27 @@ Portal Lowongan Kerja - {{ $title }}
 			</div>
 		</div>
 	</div>
-</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-body">
+					<div class="row justify-content-center mb-2">
+						<span class="text-muted">Periksa data pelamar terlebih dahulu sebelum melakukan perubahan status.</span>
+					</div>
+					<div class="row justify-content-center">
+						<a href="javascript:void()" class="btn btn-rounded btn-success mx-1" data-toggle="modal" data-target="#update-{{ $lamaran->id }}">
+							<span class="text-light">Terima</span>
+						</a>
+						
+						<a href="javascript:void()" class="btn btn-rounded btn-danger mx-1" data-toggle="modal" data-target="#tolak-{{ $lamaran->id }}">
+							<span class="text-light">Tolak</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 @include('admin.lamaran.modal-update-status-lamaran')
 @endsection

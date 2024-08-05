@@ -41,7 +41,8 @@ Portal Lowongan Kerja - {{ $title }}
 																	<th>Pelamar</th>
 																	<th>Lowongan</th>
 																	<th>Status</th>
-																	<th>Action</th>
+																	<th>Waktu</th>
+																	<th>Aksi</th>
 															</tr>
 													</thead>
 													<tbody>
@@ -51,10 +52,11 @@ Portal Lowongan Kerja - {{ $title }}
 															<td>{{ ucwords($dt->pelamar->nama) }}</td>
 															<td>{{ $dt->lowongan->judul }}</td>
 															<td>{{ ucwords($dt->status_lamaran) }}</td>
+															<td>{{ \Carbon\Carbon::parse($dt->updated_at)->format('d-m-Y, H.i') }}</td>
 															<td>
 																<div class="dropdown">
 																	<button type="button" class="btn btn-sm btn-outline-primary btn-rounded dropdown-toggle" data-toggle="dropdown">
-																			Action
+																			Aksi
 																	</button>
 																	<div class="dropdown-menu dropdown-menu-right">
 																		<a href="/admin/lamaran/detail/{{ $dt->id }}" class="dropdown-item text-muted">
@@ -65,7 +67,7 @@ Portal Lowongan Kerja - {{ $title }}
 																				Edit
 																			</a>
 																			<a href="{{ route('lamaran.destroy', $dt->id) }}" class="dropdown-item text-muted" data-confirm-delete="true">
-																				Delete
+																				Hapus
 																			</a>
 																		@endcan
 																	</div>

@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index']);
 
     Route::resource('/admin/lowongan', LowonganController::class);
+    Route::put('/admin/lowongan/update/{id}', [LowonganController::class, 'updateStatus'])->name('lowongan.updateStatus');
 
     Route::resource('/admin/perusahaan', PerusahaanController::class);
 
@@ -80,6 +81,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/lamaran/riwayat', [LamaranController::class, 'index']);
     Route::get('/admin/lamaran/detail/{id}', [LamaranController::class, 'show']);
+    Route::get('/admin/lamaran/periksa/{id}', [LamaranController::class, 'periksa']);
     Route::post('updateStatusLamaran/{id}', [LamaranController::class, 'updateStatusLamaran'])->name('updateStatusLamaran');
     Route::post('tolakLamaran/{id}', [LamaranController::class, 'tolakLamaran'])->name('tolakLamaran');
     Route::post('admin/lamaran/{id}', [LamaranController::class, 'update'])->name('lamaran.update');

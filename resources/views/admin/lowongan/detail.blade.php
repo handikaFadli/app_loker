@@ -32,51 +32,51 @@ Portal Lowongan Kerja - {{ $title }}
 						<div class="profile-personal-info">
 							<div class="row mb-4">
 								<div class="col-3">
-									<h5 class="f-w-500">Perusahaan <span class="pull-right">:</span></h5>
+									<h5 class="f-w-500">Perusahaan <span class="pull-right text-muted">:</span></h5>
 								</div>
-								<div class="col-9"><span>{{ $data->perusahaan->nama }}</span></div>
+								<div class="col-9"><span class="text-muted">{{ $data->perusahaan->nama }}</span></div>
 							</div>
 							<div class="row mb-4">
 								<div class="col-3">
-									<h5 class="f-w-500">Kategori <span class="pull-right">:</span></h5>
+									<h5 class="f-w-500">Kategori <span class="pull-right text-muted">:</span></h5>
 								</div>
-								<div class="col-9"><span>{{ $data->kategori }}</span></div>
+								<div class="col-9"><span class="text-muted">{{ $data->kategori }}</span></div>
 							</div>
 							<div class="row mb-4">
 								<div class="col-3">
-									<h5 class="f-w-500">Tipe <span class="pull-right">:</span></h5>
+									<h5 class="f-w-500">Tipe <span class="pull-right text-muted">:</span></h5>
 								</div>
-								<div class="col-9"><span>{{ $data->tipe }}</span></div>
+								<div class="col-9"><span class="text-muted">{{ $data->tipe }}</span></div>
 							</div>
 							<div class="row mb-4">
 								<div class="col-3">
-									<h5 class="f-w-500">Status <span class="pull-right">:</span></h5>
+									<h5 class="f-w-500">Status <span class="pull-right text-muted">:</span></h5>
 								</div>
-								<div class="col-9"><span>{{ $data->status }}</span></div>
+								<div class="col-9"><span class="text-muted">{{ $data->status }}</span></div>
 							</div>
 							<div class="row mb-4">
 								<div class="col-3">
-									<h5 class="f-w-500">Batas Akhir <span class="pull-right">:</span></h5>
+									<h5 class="f-w-500">Batas Akhir <span class="pull-right text-muted">:</span></h5>
 								</div>
-								<div class="col-9"><span>{{ $data->batas_akhir }}</span></div>
+								<div class="col-9"><span class="text-muted">{{ $data->batas_akhir }}</span></div>
 							</div>
 							<div class="row mb-4">
 								<div class="col-3">
-									<h5 class="f-w-500">Deskripsi <span class="pull-right">:</span></h5>
+									<h5 class="f-w-500">Deskripsi <span class="pull-right text-muted">:</span></h5>
 								</div>
-								<div class="col-9"><span>{{ $data->deskripsi }}</span></div>
+								<div class="col-9"><span class="text-muted">{{ $data->deskripsi }}</span></div>
 							</div>
 							<div class="row mb-4">
 								<div class="col-3">
-									<h5 class="f-w-500">Informasi <span class="pull-right">:</span></h5>
+									<h5 class="f-w-500">Informasi <span class="pull-right text-muted">:</span></h5>
 								</div>
-								<div class="col-9"><span>{{ $data->informasi }}</span></div>
+								<div class="col-9"><span class="text-muted">{{ $data->informasi }}</span></div>
 							</div>
 							<div class="row mb-4">
 								<div class="col-3">
-									<h5 class="f-w-500">Persyaratan <span class="pull-right">:</span></h5>
+									<h5 class="f-w-500">Persyaratan <span class="pull-right text-muted">:</span></h5>
 								</div>
-								<div class="col-9"><span>{!! $data->persyaratan !!}</span></div>
+								<div class="col-9"><span class="text-muted">{!! $data->persyaratan !!}</span></div>
 							</div>
 						</div>
 					</div>

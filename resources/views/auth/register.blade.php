@@ -35,7 +35,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="password"><strong>Password</strong></label>
-                                            <input type="password" class="form-control" id="password" name="password" value="Password">
+                                            <input type="password" class="form-control" id="password" name="password">
                                             @error('password')
                                                 <div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
                                                     {{ $message }}
@@ -44,7 +44,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="password_confirmation"><strong>Konfirmasi Password</strong></label>
-                                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" value="Password">
+                                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
                                             @error('password')
                                                 <div class="invalid-feedback animated fadeInUp mx-1" style="display: block;">
                                                     {{ $message }}

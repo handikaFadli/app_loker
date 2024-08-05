@@ -40,7 +40,7 @@ Portal Lowongan Kerja - {{ $title }}
 																	<th>No</th>
 																	<th>Email</th>
 																	<th>Role</th>
-																	<th>Action</th>
+																	<th>Aksi</th>
 															</tr>
 													</thead>
 													<tbody>
@@ -52,14 +52,14 @@ Portal Lowongan Kerja - {{ $title }}
 															<td>
 																<div class="dropdown">
 																	<button type="button" class="btn btn-sm btn-outline-primary btn-rounded dropdown-toggle" data-toggle="dropdown">
-																			Action
+																			Aksi
 																	</button>
 																	<div class="dropdown-menu dropdown-menu-right">
 																		<a href="{{ route("kelola-user.edit", $dt->id) }}" class="dropdown-item text-muted">
 																			Edit
 																		</a>
 																		<a href="{{ route('kelola-user.destroy', $dt->id) }}" class="dropdown-item text-muted" data-confirm-delete="true">
-																			Delete
+																			Hapus
 																		</a>
 																	</div>
 																</div>

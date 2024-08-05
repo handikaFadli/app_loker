@@ -44,10 +44,13 @@ Portal Lowongan Kerja - {{ $title }}
 																		<th>Tipe</th>
 																		<th>Batas Akhir</th>
 																		<th>Status</th>
-																		<th>Action</th>
+																		<th>Aksi</th>
 																</tr>
 														</thead>
 														<tbody>
+															@php
+																	\Carbon\Carbon::setLocale('id');
+															@endphp
 															@foreach ($data as $dt)
 															<tr>
 																<td>{{ $loop->iteration }}</td>
@@ -56,16 +59,12 @@ Portal Lowongan Kerja - {{ $title }}
 																<td>{{ ucwords($dt->tipe) }}</td>
 																<td>{{ \Carbon\Carbon::parse($dt->batas_akhir)->translatedFormat('d F Y') }}</td>
 																<td>
-																	@if ($dt->status == "close")
-																		<span class="badge badge-rounded badge-outline-danger">Close</span>
-																	@else
-																		<span class="badge badge-rounded badge-outline-primary">Open</span>
-																	@endif
+																		<button class="btn btn-sm btn-outline-primary btn-rounded" data-toggle="modal" data-target="#update-status-{{ $dt->id }}">{{ ucwords($dt->status) }}</button>
 																</td>
 																<td>
 																	<div class="dropdown">
 																		<button type="button" class="btn btn-sm btn-outline-primary btn-rounded dropdown-toggle" data-toggle="dropdown">
-																				Action
+																				Aksi
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-right">
 																			<a href="{{ route("lowongan.show", $dt->id) }}" class="dropdown-item text-muted">
@@ -75,7 +74,7 @@ Portal Lowongan Kerja - {{ $title }}
 																				Edit
 																			</a>
 																			<a href="{{ route('lowongan.destroy', $dt->id) }}" class="dropdown-item text-muted" data-confirm-delete="true">
-																				Delete
+																				Hapus
 																			</a>
 																		</div>
 																	</div>
@@ -90,4 +89,8 @@ Portal Lowongan Kerja - {{ $title }}
 				</div>
 		</div>
 	</div>
+
+	@foreach ($data as $dtlow)
+  	@include('admin.lowongan.modal')
+	@endforeach
 @endsection

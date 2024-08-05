@@ -100,6 +100,21 @@ class LamaranController extends Controller
         );
     }
 
+    public function periksa($id)
+    {
+        $lamaran = Lamaran::with('lowongan.perusahaan', 'pelamar.pendidikan', 'pelamar.pekerjaan', 'pelamar.keterampilan')->findOrFail($id);
+
+        Gate::authorize('view', $lamaran);
+
+        return view(
+            'admin.lamaran.periksa',
+            [
+                'title' => 'Lamaran Pekerjaan',
+                'lamaran' => $lamaran,
+            ]
+        );
+    }
+
     public function downloadFormulirPelamar($id)
     {
         $pelamar = Pelamar::findOrFail($id);
@@ -224,6 +239,8 @@ class LamaranController extends Controller
         }
 
         Notification::send($users, new LamaranNotification($header, $description, $link));
+
+        Alert::success('Lamaran', 'Berhasil Dibatalkan!');
         return redirect()->back();
     }
 
@@ -326,10 +343,10 @@ class LamaranController extends Controller
 
     public function formTahapDua()
     {
-        Gate::authorize('applyLamaran', Lamaran::class);
 
         $pelamar = Pelamar::where('email', Auth::user()->email)->first();
         $lamaran = Lamaran::where('pelamar_id', $pelamar->id)->first();
+
 
         if ($lamaran->status_lamaran !== 'tahap dua') {
             return redirect()->back();
@@ -351,7 +368,6 @@ class LamaranController extends Controller
 
     public function uploadFormulir(Request $request)
     {
-        Gate::authorize('applyLamaran', Lamaran::class);
 
         $request->validate(
             [
@@ -397,6 +413,7 @@ class LamaranController extends Controller
 
     public function preview($jenis, $id)
     {
+
         // Tentukan model dan atribut berdasarkan jenis
         switch ($jenis) {
             case 'transkip':

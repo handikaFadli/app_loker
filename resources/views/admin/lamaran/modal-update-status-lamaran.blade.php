@@ -2,7 +2,7 @@
 	<div class="modal-dialog" role="document">
 			<div class="modal-content">
 					<div class="modal-header">
-							<h5 class="modal-title text-primary">Update Lamaran</h5>
+							<h5 class="modal-title text-primary">Terima Lamaran</h5>
 							<button type="button" class="close" data-dismiss="modal"><span>&times;</span>
 							</button>
 					</div>
@@ -13,8 +13,8 @@
 								<input type="hidden" class="form-control" name="status_lamaran" value="{{ $lamaran->status_lamaran }}">
 							</div>
 							@if ($lamaran->status_lamaran == "tahap awal")
-							<span> Tahapan selanjutnya pelamar akan mengisi formulir, silahkan masukkan link form untuk mendownload dan mengupload formulir.</span>
-							<div class="form-row mt-3">
+							<p class="text-muted text-center mb-4"><i class="fa fa-info-circle text-primary"></i> Tahapan selanjutnya pelamar akan mengisi formulir, silahkan masukkan link form untuk mendownload dan mengupload formulir.</p>
+							<div class="form-row">
 								<div class="form-group col-md-12">
 								<label for="deskripsi">Keterangan</label>
 								<textarea class="form-control" rows="5" id="deskripsi" name="deskripsi">Selamat, Anda lolos ke tahap selanjutnya. Silakan lengkapi data diri Anda.</textarea>
@@ -27,8 +27,8 @@
 								</div>
 							</div>
 							@elseif ($lamaran->status_lamaran == "tahap dua")
-							<span>Tahapan selanjutnya adalah sesi wawancara, silahkan isi waktu wawancara dan link gmeet.</span>
-							<div class="form-row mt-3">
+							<p class="text-muted text-center mb-4"><i class="fa fa-info-circle text-primary"></i> Tahapan selanjutnya adalah sesi wawancara, silahkan isi waktu wawancara dan link gmeet.</p>
+							<div class="form-row">
 								<div class="form-group col-md-12">
 									<label for="deskripsi">Keterangan</label>
 									<textarea class="form-control" rows="5" id="deskripsi" name="deskripsi">Selamat, Anda lolos ke tahap wawancara. Wawancara akan dilaksanakan melalui Gmeet.</textarea>
