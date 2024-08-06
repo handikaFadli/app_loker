@@ -29,7 +29,7 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-								<button type="submit" class="btn btn-primary">Kirim</button>
+								<button type="submit" class="btn btn-primary">Simpan</button>
 						</div>
 				</form>
 			</div>
